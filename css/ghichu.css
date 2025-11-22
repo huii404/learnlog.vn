@@ -1,0 +1,196 @@
+/* ============================================ */
+/* THEME: DARK PURPLE & NEON (GHI CHÚ) */
+/* ============================================ */
+
+/* 1. Nền chung toàn trang (ghi đè style cũ nếu cần) */
+body {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%) !important;
+    color: #e0d6ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    padding-bottom: 100px; /* Chừa chỗ cho Dock */
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 30px 0 40px 0;
+    color: #bb86fc;
+    text-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 2. Grid layout cho các thẻ ghi chú */
+.note-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 10px;
+}
+
+/* 3. Thẻ ghi chú (Note Card) */
+.note-card {
+    background: #1e1e38; /* Tím than đậm */
+    border: 1px solid #2a2a4e;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hiệu ứng hover neon */
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(187, 134, 252, 0.25);
+    border-color: #bb86fc;
+}
+
+/* Thanh màu trang trí bên trái card */
+.note-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #bb86fc, #00ff9d);
+}
+
+/* 4. Phần tiêu đề (Header) */
+.note-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid #2a2a4e;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.note-header i {
+    font-size: 1.5em;
+    color: #00ff9d; /* Icon màu xanh neon */
+}
+
+.note-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* 5. Phần nội dung (Body) */
+.note-body {
+    padding: 20px;
+}
+
+.answer {
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #d1c4e9; /* Tím nhạt */
+}
+
+/* 6. Block Note/Cảnh báo */
+.note-warning, .note-info {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    display: flex;
+    gap: 10px;
+    align-items: start;
+}
+
+/* Kiểu Warning (Màu cam/đỏ nhạt) */
+.note-warning {
+    background: rgba(255, 82, 82, 0.1);
+    border-left: 3px solid #ff5252;
+    color: #ff8a80;
+}
+
+/* Kiểu Info (Màu xanh/tím) */
+.note-info {
+    background: rgba(187, 134, 252, 0.1);
+    border-left: 3px solid #bb86fc;
+    color: #e0aaff;
+}
+
+/* 7. Block Code (Giao diện giống Editor) */
+.code-snippet {
+    background: #0f0f1e; /* Đen gần tuyệt đối */
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #2a2a4e;
+    color: #aaa;
+    font-size: 0.8em;
+    padding: 5px 15px;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #333;
+}
+
+.code-snippet pre {
+    margin: 0;
+    padding: 15px;
+    overflow-x: auto; /* Cho phép cuộn ngang nếu code dài */
+}
+
+.code-snippet code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: #00ff9d; /* Màu code xanh neon */
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.8em;
+    }
+    .note-grid {
+        grid-template-columns: 1fr; /* 1 cột trên mobile */
+    }
+}
+/* Thêm vào cuối file css/ghichu.css */
+
+/* Chỉnh lại header của block code để chứa nút copy */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+/* Style nút copy */
+.copy-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: #aaa;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    border-color: #e0aaff;
+    color: #e0aaff;
+    background: rgba(224, 170, 255, 0.1);
+}
+
+/* Hiệu ứng xuất hiện từ từ cho card */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sanpham.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS để tạo hiệu ứng xổ xuống */
+        .sidebar-filters .filter-group .category-item {
+            cursor: pointer;
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-filters .filter-group .category-item .category-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .sidebar-filters .filter-group .category-item .category-title .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-filters .filter-group .category-item.expanded .toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-filters .filter-group .subcategory-list {
+            list-style: none;
+            padding-left: 20px;
+            max-height: 0;
+            /* Ẩn các mục con ban đầu */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .sidebar-filters .filter-group .category-item.expanded .subcategory-list {
+            max-height: 200px;
+            /* Chiều cao tối đa khi sổ ra */
+        }
+
+        .sidebar-filters .filter-group .subcategory-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="dock-nav" id="dockNav">
+    <a href="index.html" title="Gameshow"><i class="fas fa-gamepad"></i><span class="tooltip">Gameshow</span></a>
+    <a href="sanpham.html" title="Sản Phẩm"><i class="fas fa-box-archive"></i><span class="tooltip">Sản Phẩm</span></a>
+    <a href="tienich.html" title="Tiện Ích"><i class="fas fa-tools"></i><span class="tooltip">Tiện Ích</span></a>
+    <a href="ghichu.html" title="Ghi Chú"><i class="fas fa-sticky-note"></i><span class="tooltip">Ghi Chú</span></a>
+</nav>
+
+    <main>
+        <div class="container page-layout">
+            <button class="filter-toggle-btn mobile-only" id="filterToggle"><i class="fas fa-filter"></i> Lọc sản
+                phẩm</button>
+
+            <div class="sidebar-filters" id="sidebarFilters">
+                <button class="close-filter-btn mobile-only" id="closeFilterBtn"><i class="fas fa-times"></i></button>
+                <aside class="filters">
+                    <h3>Bộ lọc</h3>
+                    <div class="filter-group">
+                        <h4>Danh mục</h4>
+                        <ul id="categoryFilter">
+                            <li class="category-item">
+                                <label>
+                                    <input type="radio" name="category" value="all" checked>
+                                    Tất cả sản phẩm
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="product-listing">
+                <div class="product-count-container">
+                    <span id="productCount" class="product-count-text"></span>
+                </div>
+                <div class="toolbar">
+                    <input type="search" id="searchInput" placeholder="Tìm kiếm source code, đồ thanh lý...">
+                    <select id="sortBy">
+                        <option value="newest">Mới nhất</option>
+                        <option value="price-asc">Giá: Thấp đến Cao</option>
+                        <option value="price-desc">Giá: Cao đến Thấp</option>
+                    </select>
+                </div>
+                <div class="product-grid" id="allProductGrid">
+                </div>
+                <div class="pagination" id="paginationControls">
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <div class="overlay" id="sidebarOverlay"></div>
+
+    <script src="js/product_data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/sanpham.js"></script>
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <span class="close-btn" id="closeQrModal">&times;</span>
+            <h3>Chia sẻ sản phẩm</h3>
+            <div id="qrcodeContainer">
+            </div>
+            <p id="qrProductLink" class="product-link-text"></p>
+        </div>
+    </div>
+</body>
+
+</html>

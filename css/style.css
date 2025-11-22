@@ -1,0 +1,343 @@
+/* Reset CSS cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Thay bằng font bạn muốn */
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* Giữ max-width để web không quá rộng trên màn hình lớn */
+    margin: auto;
+    overflow: hidden; /* Clear floats */
+    padding: 0 20px; /* Padding ngang cho nội dung */
+}
+
+/* Header & Navbar */
+header {
+    background: #fff;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #50b3a2;
+    text-decoration: none;
+    padding: 15px 0; /* Adjust padding for better spacing */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.nav-links li {
+    padding: 0 15px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    padding: 20px 0; /* Padding trên dưới cho vùng click */
+    display: block;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.nav-links a:hover,
+.nav-links a.active {
+    color: #50b3a2;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #50b3a2;
+    bottom: 0;
+    left: 0;
+}
+
+/* Các nút chung */
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #50b3a2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #439a8c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+/* Các phần tử sản phẩm */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Để phần info giãn ra lấp đầy */
+}
+
+.product-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #333;
+}
+.product-info .price {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-top: auto; /* Đẩy giá xuống cuối */
+}
+.product-info .price.free {
+    color: #50b3a2;
+}
+
+
+/* Các phần chung khác */
+.section-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 40px;
+}
+.loading-text, .error-text {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin: 50px 0;
+}
+.error-text {
+    color: #e74c3c;
+}
+
+/* Hamburger menu for mobile */
+.hamburger-menu {
+    display: none; /* Hide on desktop */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 15px;
+    gap: 5px;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide nav links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 15px 0;
+        z-index: 999;
+    }
+    .nav-links.active { /* Show menu when hamburger is clicked */
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+    .nav-links li a {
+        padding: 10px 20px;
+        display: block; /* Để link chiếm toàn bộ chiều rộng item */
+    }
+    .nav-links li a.active::after {
+        bottom: 5px; /* Điều chỉnh vị trí gạch chân trên mobile menu */
+    }
+    
+    .hamburger-menu {
+        display: flex; /* Show hamburger on small screens */
+    }
+
+    .logo {
+        padding-left: 15px; /* Giảm padding cho logo */
+    }
+
+    /* Adjust product grid for smaller screens */
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller cards on mobile */
+        gap: 15px;
+    }
+    .product-card img {
+        height: 150px;
+    }
+    .product-info h3 {
+        font-size: 1.1em;
+    }
+}
+/* ===================================== */
+/* MỚI: Thanh Điều Hướng Kiểu macOS Dock */
+/* ===================================== */
+.dock-nav {
+    position: fixed; /* Vị trí cố định */
+    bottom: 20px; /* Cách đáy 20px */
+    left: 50%; /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%); /* Tinh chỉnh lại vị trí căn giữa */
+    z-index: 1001; /* Luôn nằm trên cùng */
+    
+    display: flex;
+    align-items: flex-end; /* Căn các icon xuống dưới cùng */
+    gap: 10px; /* Khoảng cách giữa các icon */
+    padding: 10px 15px;
+    height: 70px; /* Chiều cao để có không gian cho hiệu ứng phóng to */
+    
+    background-color: rgba(255, 255, 255, 0.6); /* Nền trắng mờ */
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    /* Hiệu ứng "kính mờ" đặc trưng */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.dock-nav a {
+    color: #333;
+    font-size: 28px; /* Kích thước icon */
+    padding: 10px;
+    text-decoration: none;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Hiệu ứng mượt mà */
+}
+
+/* Chấm báo hiệu trang đang active */
+.dock-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #50b3a2;
+    border-radius: 50%;
+}
+
+/* Nhãn tên của icon khi hover */
+.dock-nav a .tooltip {
+    position: absolute;
+    bottom: 120%; /* Nằm phía trên icon */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dock-nav a:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px); /* Hiệu ứng nảy lên */
+}

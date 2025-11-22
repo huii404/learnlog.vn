@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc Nghiệm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/trangchu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="dock-nav" id="dockNav">
+    <a href="index.html" title="Gameshow"><i class="fas fa-gamepad"></i><span class="tooltip">Gameshow</span></a>
+    <a href="sanpham.html" title="Sản Phẩm"><i class="fas fa-box-archive"></i><span class="tooltip">Sản Phẩm</span></a>
+    <a href="tienich.html" title="Tiện Ích"><i class="fas fa-tools"></i><span class="tooltip">Tiện Ích</span></a>
+    <a href="ghichu.html" title="Ghi Chú"><i class="fas fa-sticky-note"></i><span class="tooltip">Ghi Chú</span></a>
+</nav>
+
+    <main id="mainContent">
+        <section class="content-section animate-section from-left">
+            <div class="container">
+                <h2 class="section-title">Game Trắc Nghiệm</h2>
+                <!-- CHỌN CHỦ ĐỀ -->
+                <div class="quiz-setup">
+                    <select id="topicSelect">
+                        <option value="">-- Chọn chủ đề --</option>
+                        <option value="programming">Lập Trình</option>
+                        <option value="excel">Excel</option>
+                        <option value="cybersecurity">An Ninh Mạng</option>
+                        <option value="random">Ngẫu Nhiên (Tất cả)</option>
+                        <option value="fillblank">Điền Từ Thiếu</option>
+                    </select>
+                    <button id="startQuizBtn" class="cta-button">Bắt Đầu Ngay!</button>
+                </div>
+
+            <div id="fillBlankInputContainer" style="display:none;">
+                <input type="text" id="fillBlankInput" placeholder="Nhập chính xác cụm từ còn thiếu..." class="fillblank-input"
+                    autocomplete="off">
+                <button id="submitFillBlankBtn" class="cta-button">Gửi Đáp Án</button>
+            </div>
+
+                <!-- KHU VỰC CHƠI -->
+                <div id="quizContainer" style="display:none;">
+                    <div class="progress-bar"><div id="progressFill"></div></div>
+                    <div class="question-number">Câu <span id="currentQ">1</span>/<span id="totalQ">10</span></div>
+                    <h3 id="questionText"></h3>
+                    <div id="optionsContainer"></div>
+                    <button id="nextQuestionBtn" class="cta-button" style="display:none;">Tiếp Theo</button>
+                    <button id="quitQuizBtn" class="cta-button quit-btn">Rời Game</button>
+                    </div>
+
+                <!-- TỔNG KẾT -->
+                <div id="quizSummary" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <div class="neon-border"></div>
+                        <div class="game-over-title" id="resultTitle">HOÀN THÀNH!</div>
+                        <div class="score-display"><span id="scoreText">Đúng 10/10</span></div>
+                        <div class="reward-medals" id="rewardText"></div>
+                        <div class="stats-grid">
+                            <div><i class="fas fa-stopwatch"></i> Thời gian: <span id="timeTaken">0:00</span></div>
+                            <div><i class="fas fa-trophy"></i> Rank: <span id="rankText">S</span></div>
+                            <div><i class="fas fa-bolt"></i> Combo x<span id="comboText">10</span></div>
+                        </div>
+                        <div id="confetti"></div>
+                        <button id="restartQuizBtn" class="cta-button neon-btn">Chơi Lại</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/trangchu.js"></script>
+</body>
+</html>
