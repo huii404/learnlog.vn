@@ -171,13 +171,13 @@
     .chatbox-window {
         /* *** CÁC THUỘC TÍNH CẦN THIẾT ĐỂ KHẮC PHỤC LỖI *** */
         position: fixed; /* BẮT BUỘC: Neo vào màn hình (viewport) */
-        top: 0;          /* Neo sát mép trên */
+        top: 10;          /* Neo sát mép trên */
         left: 0;         /* Neo sát mép trái */
         right: 0;        /* Neo sát mép phải */
         /* ************************************************* */
 
-        width: 100vw;    /* Chiếm 100% chiều rộng viewport */
-        height: 100vh;   /* Chiếm 100% chiều cao viewport */
+        width: 90vw;    /* Chiếm 100% chiều rộng viewport */
+        height: 85vh;   /* Chiếm 100% chiều cao viewport */
         bottom: 0;
         border-radius: 0; /* Xóa bo góc để cửa sổ liền mạch */
         z-index: 1018; /* Đảm bảo cửa sổ chat nằm trên tất cả, kể cả dock */
