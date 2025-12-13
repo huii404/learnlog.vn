@@ -160,7 +160,6 @@
 #chatboxSend:hover {
     background: #47f7e9;
 }
-
 /* Hiệu ứng */
 @keyframes fadeInMessage {
     from { opacity: 0; transform: translateY(10px); }
@@ -170,24 +169,28 @@
 @media (max-width: 450px) {
     /* Full width trên mobile */
     .chatbox-window {
-        /* Ghi đè các thuộc tính mặc định để nó neo vào viewport */
-        position: fixed; /* Rất quan trọng, nó sẽ neo vào viewport */
-        width: 100vw; 
-        height: 100vh; 
-        top: 0; 
-        left: 0;
-        right: 0;
+        /* *** CÁC THUỘC TÍNH CẦN THIẾT ĐỂ KHẮC PHỤC LỖI *** */
+        position: fixed; /* BẮT BUỘC: Neo vào màn hình (viewport) */
+        top: 0;          /* Neo sát mép trên */
+        left: 0;         /* Neo sát mép trái */
+        right: 0;        /* Neo sát mép phải */
+        /* ************************************************* */
+
+        width: 100vw;    /* Chiếm 100% chiều rộng viewport */
+        height: 100vh;   /* Chiếm 100% chiều cao viewport */
         bottom: 0;
-        border-radius: 0; 
-        z-index: 1018; 
-        margin: 0; 
+        border-radius: 0; /* Xóa bo góc để cửa sổ liền mạch */
+        z-index: 1018; /* Đảm bảo cửa sổ chat nằm trên tất cả, kể cả dock */
     }
+
     /* Đảm bảo nút toggle nằm ở vị trí cố định, không bị dính vào dock */
     .chatbox-container {
         bottom: 75px; /* Giữ nút toggle cao hơn dock (75px) */
         right: 15px; 
+        /* KHÔNG thay đổi position: fixed; ở đây, nó đã có ở style mặc định */
     }
 }
+
 /* === Bổ sung: Gợi ý Từ khóa === */
 .chatbox-suggestions {
     padding: 10px;
