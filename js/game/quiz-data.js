@@ -62,13 +62,11 @@ const quizData = {
         { question: "Loại tấn công nào lợi dụng tâm lý sợ hãi, tham lam hoặc tin tưởng để lừa người dùng?", options: ["DDoS", "Brute Force", "Social Engineering (Kỹ thuật Xã hội)", "Zero-day"], correct: 2 },
         { question: "Nếu trình duyệt báo 'Kết nối không an toàn' (Not Secure), bạn nên làm gì?", options: ["Bỏ qua và tiếp tục truy cập", "Tìm phiên bản HTTPS hoặc thoát khỏi trang web", "Gửi phản hồi cho quản trị viên", "Cài lại trình duyệt"], correct: 1 },
     ],
+    excel: [ // <-- DỮ LIỆU MỚI
+        { question: "Hàm nào được dùng để tính tổng các giá trị thỏa mãn một điều kiện?", options: ["SUM", "COUNTIF", "SUMIF", "AVERAGE"], correct: 2 },
+        { question: "Phím tắt nào giúp chuyển nhanh giữa các Sheet trong Excel?", options: ["Ctrl + S", "Alt + Tab", "Ctrl + Page Up/Down", "F1"], correct: 2 },
+        { question: "Địa chỉ tuyệt đối của ô A1 được viết như thế nào?", options: ["A1", "$A$1", "A:1", "$A1"], correct: 1 },
+        { question: "Mục đích của hàm VLOOKUP là gì?", options: ["Cộng các giá trị", "Tìm kiếm giá trị theo cột ngang", "Tìm kiếm giá trị theo cột dọc", "Đếm số ô"], correct: 2 },
+        { question: "Cách nào để đóng băng dòng tiêu đề (Header Row) khi cuộn?", options: ["Data Validation", "Conditional Formatting", "Freeze Panes", "Table Design"], correct: 2 },
+    ],
 };
-
-// Tổng hợp tất cả câu hỏi trắc nghiệm
-const allQuizQuestions = [
-    ...quizData.cpp,
-    ...quizData.python,
-    ...quizData.java,
-    ...quizData.programming,
-    ...quizData.cybersecurity
-];

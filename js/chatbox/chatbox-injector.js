@@ -1,58 +1,44 @@
-// js/chatbox-injector.js
+// js/chatbox/chatbox-injector.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Nội dung HTML của Chat Box
-    const chatboxHtmlContent = `
-        <div id="chatboxContainer" class="chatbox-container">
-            <button id="chatboxToggle" class="chatbox-toggle">
-                <i class="fas fa-comment-dots"></i>
-                <span class="chatbox-badge" id="chatboxBadge">1</span>
-            </button>
+    
+    // Hàm tải file HTML cục bộ
+    function loadChatboxHtml() {
+        fetch('chatbox.html') // Giả sử chatbox.html nằm cùng cấp với index.html, sanpham.html...
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Không thể tải chatbox.html: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(htmlContent => {
+                // 1. Nhúng nội dung HTML đã tải vào cuối body
+                document.body.insertAdjacentHTML('beforeend', htmlContent);
 
-            <div id="chatboxWindow" class="chatbox-window" style="display: none;">
-                <div class="chatbox-header">
-                    <h4>HVCoder Support Bot</h4>
-                    <i class="fas fa-times close-btn" id="chatboxClose"></i>
-                </div>
-                <div class="chatbox-messages" id="chatboxMessages">
-                    <div class="message bot-message">
-                        <p>Chào bạn! Tôi có thể giúp gì cho bạn về các chứng chỉ, sản phẩm, hay ghi chú code?</p>
-                    </div>
-                </div>
+                // 2. Dynamic import CSS và JS Logic
                 
-                <div id="chatboxSuggestions" class="chatbox-suggestions hidden">
-                    </div>
+                // Nhúng CSS
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'css/chatbox.css'; 
+                document.head.appendChild(link);
+                
+                // Nhúng Data
+                const dataScript = document.createElement('script');
+                dataScript.src = 'js/chatbox/chatbox-data.js'; 
+                dataScript.onload = () => {
+                    // Nhúng Logic sau khi Data đã tải xong
+                    const logicScript = document.createElement('script');
+                    logicScript.src = 'js/chatbox/chatbox-logic.js'; 
+                    document.body.appendChild(logicScript);
+                };
+                document.body.appendChild(dataScript);
 
-                <div class="chatbox-input-area">
-                    <button id="chatboxMenuToggle" class="chatbox-menu-toggle">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <input type="text" id="chatboxInput" placeholder="Nhập câu hỏi...">
-                    <button id="chatboxSend"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </div>
-        </div>
-    `;
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải hoặc nhúng Chatbox:', error);
+            });
+    }
 
-    // Nhúng Chat Box vào cuối body
-    document.body.insertAdjacentHTML('beforeend', chatboxHtmlContent);
-
-    // Dynamic import (chỉ sau khi HTML đã được thêm vào DOM)
-    // Tự động nhúng file CSS và Logic
-    
-    // Nhúng CSS
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'css/chatbox.css'; 
-    document.head.appendChild(link);
-    
-    // Nhúng Data và Logic JS (Cần đảm bảo thứ tự load)
-    const dataScript = document.createElement('script');
-    dataScript.src = 'js/chatbox-data.js'; 
-    dataScript.onload = () => {
-        const logicScript = document.createElement('script');
-        logicScript.src = 'js/chatbox-logic.js'; 
-        document.body.appendChild(logicScript);
-    };
-    document.body.appendChild(dataScript);
+    loadChatboxHtml();
 });

@@ -1,7 +1,4 @@
 const notesData = [
-  // ====================================================
-  // PYTHON
-  // ====================================================
   {
     title: "Đảo ngược chuỗi (String Reversal)",
     category: "Lập trình", 
@@ -27,42 +24,30 @@ print(even_numbers) # [0, 2, 4, 6, 8, 10]`,
     },
   },
 
-  // ====================================================
-  // C++
-  // ====================================================
   {
-    title: "Khởi tạo vector 10 phần tử 0",
+    title: "Top IDE dành cho C++ ?",
     category: "Lập trình", 
     subCategory: "C++", 
     answer:
-      "Sử dụng hàm khởi tạo của `std::vector` với kích thước và giá trị mặc định để tránh vòng lặp khởi tạo thủ công.",
+      "Rất nhiều",
     code: {
-      lang: "C++",
-      content: `#include <vector>
-// Khởi tạo 10 phần tử, tất cả đều là 0
-std::vector<int> vec(10, 0); 
-// Kích thước là 10`,
+      lang: "",
+      content: `VSCODE XANH,VSCODE TÍM,CODE BLOCK,NETBEAN,...`,
     },
   },
   {
-    title: "Sử dụng Con trỏ (Pointers) cơ bản",
+    title: "Vì sao dùng VSCODE XANH DỄ BỊ LỖI?",
     category: "Lập trình", 
-    subCategory: "C++", 
-    answer: "Con trỏ lưu trữ địa chỉ bộ nhớ của một biến khác. Toán tử `&` lấy địa chỉ, toán tử `*` giải tham chiếu.",
+    answer: "",
     code: {
-      lang: "C++",
-      content: `int var = 42;
-int* ptr = &var; // ptr lưu địa chỉ của var
-
-std::cout << *ptr << "\\n"; // Output: 42
-
-*ptr = 100; // Thay đổi giá trị qua con trỏ`,
+      content: `
+      1. VSCODE LÀ EDIT KHÔNG PHẢI IDE
+      2. PHẢI CÀI MÔI TRƯỜNG + EXTENSION(APP)
+      3. EXTENSION CẦN THỜI GIAN CHẠY KHI BIÊN DỊCH
+      4. KHÓ CHỌN EXTENSION ĐÚNG`,
     },
   },
 
-  // ====================================================
-  // JAVASCRIPT
-  // ====================================================
   {
     title: "Bắt lỗi bất đồng bộ với async/await",
     category: "Lập trình", 
@@ -98,9 +83,6 @@ console.log('10' === 10);   // false`,
     },
   },
 
-  // ====================================================
-  // HTML/CSS
-  // ====================================================
   {
     title: "Tạo Layout 3 cột bằng Grid",
     category: "Lập trình", 

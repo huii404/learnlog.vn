@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Đảm bảo quizData và allQuizQuestions đã được load từ quiz-data.js
-    if (typeof quizData === 'undefined' || typeof allQuizQuestions === 'undefined') {
+    // Chỉnh sửa: Đã loại bỏ allQuizQuestions
+    if (typeof quizData === 'undefined') {
         console.error('Lỗi: Không tìm thấy dữ liệu quizData. Vui lòng kiểm tra file quiz-data.js.');
         return;
     }
@@ -76,9 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 examName = 'An Ninh Mạng Bình Dân';
                 questionPool = quizData.cybersecurity;
                 break;
-            default: // exam_all (Tổng hợp tất cả)
-                examName = 'Kỹ thuật Tổng hợp (All)';
-                questionPool = allQuizQuestions;
+            case 'exam_excel': // <-- THÊM MỚI
+                examName = 'Excel Văn Phòng';
+                questionPool = quizData.excel;
+                break;
+            default: // Đặt lại về Programming nếu không khớp (do đã loại bỏ exam_all)
+                examName = 'Lập trình Tổng hợp (Mặc định)';
+                questionPool = [...quizData.cpp, ...quizData.python, ...quizData.java, ...quizData.programming];
                 break;
         }
         
@@ -91,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
              return alert('Không có câu hỏi nào để bắt đầu bài thi này.');
         }
 
-        if (!confirm(`Bạn có chắc muốn bắt đầu Thi Chứng Chỉ ${examName}? Bài thi có ${numQuestions} câu, thời gian ${Math.floor(durationSeconds / 60)} phút. Yêu cầu ${Math.ceil(numQuestions * passRate)}/${numQuestions} câu để ĐẠT.`)) return;
+        // Đã loại bỏ hàm confirm() theo yêu cầu.
+        // if (!confirm(`Bạn có chắc muốn bắt đầu Thi Chứng Chỉ ${examName}? Bài thi có ${numQuestions} câu, thời gian ${Math.floor(durationSeconds / 60)} phút. Yêu cầu ${Math.ceil(numQuestions * passRate)}/${numQuestions} câu để ĐẠT.`)) return;
 
         // Thiết lập biến và câu hỏi
         currentQuestions = [...questionPool];
