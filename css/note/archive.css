@@ -1,0 +1,24 @@
+.archive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.archive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #bb86fc;
+    padding-bottom: 20px;
+}
+
+.back-btn {
+    color: #bb86fc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-btn:hover { text-decoration: underline; }
+
+h1 { color: #fff; margin: 0; font-size: 1.5rem; }

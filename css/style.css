@@ -272,35 +272,48 @@ footer {
 /* MỚI: Thanh Điều Hướng Kiểu macOS Dock */
 /* ===================================== */
 .dock-nav {
-    position: fixed; /* Vị trí cố định */
-    bottom: 20px; /* Cách đáy 20px */
-    left: 50%; /* Căn giữa theo chiều ngang */
-    transform: translateX(-50%); /* Tinh chỉnh lại vị trí căn giữa */
-    z-index: 1001; /* Luôn nằm trên cùng */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
     
     display: flex;
-    align-items: flex-end; /* Căn các icon xuống dưới cùng */
-    gap: 10px; /* Khoảng cách giữa các icon */
+    align-items: flex-end;
+    gap: 10px;
     padding: 10px 15px;
-    height: 70px; /* Chiều cao để có không gian cho hiệu ứng phóng to */
+    height: 75px; 
     
-    background-color: rgba(255, 255, 255, 0.6); /* Nền trắng mờ */
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Logic cuộn ngang */
+    max-width: 90vw;           /* Không tràn quá 90% màn hình */
+    overflow-x: auto;          /* Hiện cuộn khi quá nhiều icon */
+    overflow-y: hidden;        /* Chặn cuộn dọc */
+    white-space: nowrap;       /* Giữ icon trên một hàng */
     
-    /* Hiệu ứng "kính mờ" đặc trưng */
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    /* Giao diện Dark Glass (Hợp với theme tím của bạn) */
+    background-color: rgba(34, 27, 53, 0.6); 
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(187, 134, 252, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    /* Ẩn thanh cuộn để đẹp hơn */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* IE/Edge */
 }
 
+.dock-nav::-webkit-scrollbar {
+    display: none;
+}
 .dock-nav a {
-    color: #333;
-    font-size: 28px; /* Kích thước icon */
+    flex: 0 0 auto;             /* Ngăn icon bị co rúm lại */
+    color: #bb86fc;             /* Màu tím đặc trưng của bạn */
+    font-size: 26px;
     padding: 10px;
     text-decoration: none;
     position: relative;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Hiệu ứng mượt mà */
+    transition: transform 0.2s ease;
 }
 
 /* Chấm báo hiệu trang đang active */
@@ -319,25 +332,22 @@ footer {
 /* Nhãn tên của icon khi hover */
 .dock-nav a .tooltip {
     position: absolute;
-    bottom: 120%; /* Nằm phía trên icon */
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-    
+    background-color: #bb86fc;
+    color: #1a1a2e;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: all 0.2s ease;
+    pointer-events: none;
 }
 
 .dock-nav a:hover .tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(-5px); /* Hiệu ứng nảy lên */
 }

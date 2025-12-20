@@ -1,66 +1,70 @@
-// js/chatbox-data.js
 
 const chatBotKnowledge = [
-  //Gameshow/Chứng chỉ
+  // 1. CHỨNG CHỈ / GAMESHOW
   {
-    keywords: ["chứng chỉ","thi","câu hỏi","score","pass","bằng khen","gameshow","làm bài thi","đậu chứng chỉ","bao nhiêu điểm","cách nhận bằng","quy tắc thi","thời gian thi","C++ chứng chỉ","Python chứng chỉ","Java chứng chỉ","An Ninh Mạng chứng chỉ",],
-    response:'Trả lời câu hỏi thông qua bài test.Chi tiết hướng dẫn: <a href="index.html" target="_blank" style="color: #03dac6; font-weight: bold;">Xem tại đây</a>.',
-  },
-  //Sản phẩm/Tài nguyên
-  {
-    keywords: ["sản phẩm","tài nguyên","tool","source code","code","khóa học","mua code","tải tool","tài liệu học","đồ thanh lý","mã nguồn","phần mềm",],
-    response:'Chi tiết hướng dẫn: <a href="sanpham.html" target="_blank" style="color: #03dac6; font-weight: bold;">Xem tại đây</a>.',
-  },
-  //Liên hệ
-  {
-    keywords: ["mua","giá","liên hệ","hotline","zalo","cách mua","phí","thanh toán","hỗ trợ","gặp admin","số điện thoại","email","mua sản phẩm",],
-    response:'Email: hcao84539@gmail.com',
-  },
-  //  Cấu trúc trang
-  {
-    keywords: ["trang web","cấu trúc","web này","tác giả","giới thiệu","chủ trang web","mục đích","thông tin về trang","người làm web",],
-    response:"Trang web này là một thư viện tổng hợp về Tài Nguyên Kỹ thuật, Lập trình và các Công cụ (Tool). Nó được xây dựng bởi HV, nhằm mục đích chia sẻ kiến thức và sản phẩm.",
+    keywords: ["chứng chỉ", "chung chi", "thi", "score", "pass", "bằng", "gameshow", "làm bài", "đậu", "điểm", "quy tắc"],
+    response: 'Trả lời câu hỏi thông qua bài test. Chi tiết hướng dẫn: <a href="index.html" target="_blank" style="color: #03dac6; font-weight: bold;">Xem tại đây</a>.',
   },
 
-  // chào hỏi
+  // 2. SẢN PHẨM / TÀI NGUYÊN
   {
-    keywords: ["hi","hello","chào bạn","hey seri","alo","hé lu","chào","good morning",],
-    response: "Bro đang cần tôi giúp hay tâm sự gì hả 🐔",
+    keywords: ["sản phẩm", "san pham", "tool", "source", "code", "khóa học", "tải", "phần mềm", "tài liệu", "mã nguồn"],
+    response: 'Chi tiết hướng dẫn & tài nguyên: <a href="sanpham.html" target="_blank" style="color: #03dac6; font-weight: bold;">Xem tại đây</a>.',
   },
 
-  // cười-vui vẻ
+  // 3. LIÊN HỆ / THANH TOÁN
   {
-    keywords: ["hii", "hehe", "kkk", "cười ẻ", "vãi", "hì", "kk", "hẹ hẹ","hi hi",":))",":)))",":>>",":>"],
-    response: "Cười cái con khỉ 😂 ",
-    sound:"audio/haha1.mp3",
+    keywords: ["liên hệ", "lien he", "hotline", "zalo", "mua", "giá", "phí", "thanh toán", "hỗ trợ", "admin", "sdt", "email"],
+    response: 'Email hỗ trợ: **hcao84539@gmail.com**. Admin sẽ phản hồi sớm nhất cho Bro!',
   },
 
-  // tải app web 
+  // 4. GIỚI THIỆU TRANG WEB
   {
-    keywords: ["tải app", "tải về", "app web", "cách tải về"],
-    response:'Bạn có thể cài đặt trang này như một ứng dụng (PWA) trên điện thoại và máy tính. Chi tiết hướng dẫn: <a href="huongdan.html" target="_blank" style="color: #03dac6; font-weight: bold;">Xem tại đây</a>.',
+    keywords: ["trang web", "web", "tác giả", "giới thiệu", "chủ web", "mục đích", "thông tin", "ai làm"],
+    response: "Trang web này là thư viện Tài Nguyên Kỹ thuật & Lập trình, xây dựng bởi **HV** nhằm chia sẻ kiến thức và công cụ hữu ích.",
   },
 
-  //========================================================================================
-
-  // THIẾT LẬP CÂU HỎI + CHỨC NĂNG CODE= CHATBOX TÍNH NĂNG
-
-  // TIME(ngày/tháng/năm-giờ/phút/giây-thứ)
+  // 5. CHÀO HỎI & GIAO TIẾP
   {
-    keywords: ["mấy giờ", "thời gian", "time", "giờ", "hour"],
-    response: "[CURRENT_TIME]", // Đánh dấu để logic xử lý
-  },
-  // báo cáo lỗi
-  {
-    keywords: ["app bị lỗi", "link bị lỗi", "lỗi giao diện", "lỗi", "báo cáo"],
-    response: "[report]", // đường link hiển thị ở chatbox để điền thông tin
+    keywords: ["hi", "hello", "chào", "alo", "hé lu", "hey", "good morning", "ê"],
+    response: "Chào Bro! Hôm nay tôi có thể giúp gì cho công việc của bạn không? 🐔",
   },
 
-  //
+  // 6. CẢM XÚC VUI VẺ
+  {
+    keywords: ["haha", "hehe", "kkk", "cười", "vui", "hài", "vcl", "vl", ":))", ":>","ahihi"],
+    response: "Cười cái con khỉ 😂. Vui vẻ thì làm tí code cho đời tươi trẻ đi Bro!",
+  },
+
+  // 7. CẢM XÚC TIÊU CỰC / TÂM SỰ
+  {
+    keywords: ["buồn", "chán", "mệt", "thất vọng", "tâm sự", "khóc", "áp lực", "stress"],
+    response: "Tôi hiểu cảm giác của bạn. Nghỉ ngơi một chút, uống ly cà phê rồi mọi chuyện sẽ ổn thôi! 😊",
+  },
+
+  // 8. TẢI APP (PWA)
+  {
+    keywords: ["tải app", "cài đặt", "app web", "pwa", "download app", "tải về điện thoại"],
+    response: 'Bạn có thể cài đặt trang này như một ứng dụng (PWA). Hướng dẫn: <a href="huongdan.html" target="_blank" style="color: #03dac6; font-weight: bold;">Tại đây</a>.',
+  },
+
+
+
+  // 10. THỜI GIAN & BÁO LỖI (Hàm đặc biệt)
+  {
+    keywords: ["mấy giờ", "thời gian", "time", "giờ", "ngày"],
+    response: "[CURRENT_TIME]",
+  },
+  {
+    keywords: ["lỗi", "bug", "hỏng", "không chạy", "báo cáo", "report"],
+    response: "[report]",
+  },
 ];
 
-// Khởi tạo phản hồi mặc định
+// Phản hồi mặc định khi không tìm thấy kết quả mờ nào khớp
 const defaultResponses = [
-  "Dữ liệu hệ thống chưa được cập nhật với câu hỏi của bạn!",
-  "Bạn muốn hỏi về vấn đề gì ạ? Tôi chỉ có thể trả lời các câu hỏi liên quan đến nội dung của trang web này.",
+  "Dữ liệu chưa cập nhật câu này, Bro thử gõ từ khóa khác (ví dụ: 'liên hệ', 'sản phẩm') xem?",
+  "Tôi chưa hiểu ý Bro lắm, có phải Bro muốn hỏi về tài liệu học không?",
+  "Bro gõ gì lạ thế? Thử dùng từ phổ thông hơn một chút nhé! 😂",
+  "Hmm, câu này khó quá, tôi chưa được học. Thử hỏi về 'Chứng chỉ' xem sao!"
 ];

@@ -1,44 +1,45 @@
 // js/chatbox/chatbox-injector.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Hàm tải file HTML cục bộ
-    function loadChatboxHtml() {
-        fetch('chatbox.html') // Giả sử chatbox.html nằm cùng cấp với index.html, sanpham.html...
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Không thể tải chatbox.html: ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(htmlContent => {
-                // 1. Nhúng nội dung HTML đã tải vào cuối body
-                document.body.insertAdjacentHTML('beforeend', htmlContent);
+    async function loadChatbox() {
+        try {
+            // 1. Tải cấu trúc HTML từ file rời
+            const response = await fetch('chatbox.html');
+            if (!response.ok) throw new Error('Không thể tải file chatbox.html');
+            const htmlContent = await response.text();
+            document.body.insertAdjacentHTML('beforeend', htmlContent);
 
-                // 2. Dynamic import CSS và JS Logic
-                
-                // Nhúng CSS
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = 'css/chatbox.css'; 
-                document.head.appendChild(link);
-                
-                // Nhúng Data
-                const dataScript = document.createElement('script');
-                dataScript.src = 'js/chatbox/chatbox-data.js'; 
-                dataScript.onload = () => {
-                    // Nhúng Logic sau khi Data đã tải xong
-                    const logicScript = document.createElement('script');
-                    logicScript.src = 'js/chatbox/chatbox-logic.js'; 
-                    document.body.appendChild(logicScript);
-                };
-                document.body.appendChild(dataScript);
+            // 2. Nhúng CSS vào Head
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'css/chatbox.css';
+            document.head.appendChild(link);
 
-            })
-            .catch(error => {
-                console.error('Lỗi khi tải hoặc nhúng Chatbox:', error);
-            });
+            // 3. Danh sách Script cần nạp theo thứ tự
+            // Nạp ghichu-data trước để Logic có thể truy cập dữ liệu ghi chú
+            const scripts = [
+                'js/note/ghichu-data.js',
+                'js/chatbox/chatbox-data.js',
+                'js/chatbox/chatbox-logic.js'
+            ];
+
+            for (const src of scripts) {
+                await new Promise((resolve) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.async = false; // Đảm bảo thực thi đúng thứ tự nạp
+                    script.onload = resolve;
+                    script.onerror = () => {
+                        console.warn(`Bỏ qua file không tồn tại: ${src}`);
+                        resolve();
+                    };
+                    document.body.appendChild(script);
+                });
+            }
+        } catch (error) {
+            console.error('Lỗi khởi tạo Chatbox:', error);
+        }
     }
 
-    loadChatboxHtml();
+    loadChatbox();
 });

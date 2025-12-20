@@ -1,20 +1,28 @@
+/**
+ * file: main.js
+ * Chứa logic điều hướng, thanh Dock macOS cải tiến và các tiện ích chung.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Trang web đã tải xong!");
+    console.log("Hệ thống đã sẵn sàng!");
 
     // ===============================================
-    // PHẦN CẬP NHẬT: Xử lý active link trên cả 2 navbar
+    // 1. XỬ LÝ TRẠNG THÁI ACTIVE TRÊN NAVBAR & DOCK
     // ===============================================
-    const navLinks = document.querySelectorAll('.nav-links a, .dock-nav a'); // Chọn link ở cả 2 nơi
+    const navLinks = document.querySelectorAll('.nav-links a, .dock-nav a'); 
     const currentPath = window.location.pathname.split("/").pop();
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href').split("/").pop();
+        // Kiểm tra nếu là trang chủ hoặc khớp tên file
         if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
             link.classList.add('active');
         }
     });
 
-    // Smooth scroll
+    // ===============================================
+    // 2. SMOOTH SCROLL (CUỘN MƯỢT CHO LINK NỘI BỘ)
+    // ===============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -26,14 +34,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Logic cho Hamburger Menu (giữ nguyên)
+    // ===============================================
+    // 3. LOGIC HAMBURGER MENU (MOBILE)
+    // ===============================================
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const mainNavLinks = document.querySelector('.navbar .nav-links'); 
 
     if (hamburgerMenu && mainNavLinks) {
         hamburgerMenu.addEventListener('click', function() {
             mainNavLinks.classList.toggle('active');
-            hamburgerMenu.classList.toggle('open'); 
+            hamburgerMenu.classList.toggle('open');
         });
 
         mainNavLinks.querySelectorAll('a').forEach(link => {
@@ -45,48 +55,78 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =============================================================
-    // PHẦN MỚI: Logic hiệu ứng phóng to cho thanh Dock
+    // 4. LOGIC CẢI TIẾN THANH DOCK: PHÓNG TO & CUỘN TRÁI/PHẢI
     // =============================================================
-    // Logic cho hiệu ứng Dock (Macbook)
     const dock = document.getElementById('dockNav');
     if (dock) {
-        // Thêm điều kiện để chỉ kích hoạt hiệu ứng trên màn hình lớn
-        if (window.innerWidth > 768) {
-            const dockIcons = dock.querySelectorAll('a');
-            const maxScale = 0; // Độ phóng to tối đa
-            const effectRadius = 0; // Bán kính ảnh hưởng của hiệu ứng
+        const dockIcons = dock.querySelectorAll('a');
 
-        dock.addEventListener('mousemove', function(e) {
-            const dockRect = dock.getBoundingClientRect();
-            const mouseX = e.clientX - dockRect.left;
+        // --- A. Hiệu ứng phóng to kiểu macOS (Chỉ dành cho Desktop) ---
+        if (window.innerWidth > 1024) {
+            const maxScale = 1.3;     // Phóng to tối đa 1.3 lần
+            const effectRadius = 150; // Khoảng cách chuột bắt đầu tác động
 
-            dockIcons.forEach(icon => {
-                const iconRect = icon.getBoundingClientRect();
-                const iconCenterX = (iconRect.left - dockRect.left) + (iconRect.width / 2);
-                
-                const distance = Math.abs(mouseX - iconCenterX);
-                
-                let scale = 1;
-                if (distance < effectRadius) {
-                    const scaleFactor = (1 - distance / effectRadius);
-                    scale = 1 + (maxScale - 1) * Math.cos(scaleFactor * (Math.PI / 2));
-                }
-                
-                icon.style.transform = `scale(${scale.toFixed(2)}) translateY(${(1-scale)*20}px)`;
+            dock.addEventListener('mousemove', function(e) {
+                const dockRect = dock.getBoundingClientRect();
+                const mouseX = e.clientX - dockRect.left;
+
+                dockIcons.forEach(icon => {
+                    const iconRect = icon.getBoundingClientRect();
+                    const iconCenterX = (iconRect.left - dockRect.left) + (iconRect.width / 2);
+                    const distance = Math.abs(mouseX - iconCenterX);
+                    
+                    let scale = 1;
+                    if (distance < effectRadius) {
+                        const scaleFactor = (1 - distance / effectRadius);
+                        // Sử dụng hàm Cosine để hiệu ứng chuyển đổi scale mượt mà hơn
+                        scale = 1 + (maxScale - 1) * Math.cos((1 - scaleFactor) * (Math.PI / 2));
+                    }
+                    
+                    // Áp dụng biến đổi: phóng to và đẩy nhẹ icon lên trên (translateY)
+                    icon.style.transform = `scale(${scale.toFixed(2)}) translateY(${(1 - scale) * 15}px)`;
+                    // Tạo lề động để các icon không đè lên nhau khi to ra
+                    icon.style.margin = `0 ${(scale - 1) * 10}px`; 
+                });
             });
-        });
 
-        // Reset lại kích thước khi chuột rời khỏi thanh Dock
-        dock.addEventListener('mouseleave', function() {
-            dockIcons.forEach(icon => {
-                icon.style.transform = 'scale(1) translateY(0px)';
+            // Reset trạng thái khi chuột rời khỏi Dock
+            dock.addEventListener('mouseleave', function() {
+                dockIcons.forEach(icon => {
+                    icon.style.transform = 'scale(1) translateY(0px)';
+                    icon.style.margin = '0';
+                });
             });
-        });
+        }
+
+        // --- B. Tính năng cuộn ngang bằng bánh xe chuột ---
+        // Cho phép người dùng lăn chuột để kéo thanh Dock sang trái/phải
+        dock.addEventListener('wheel', function(e) {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                // Chuyển hướng cuộn dọc của chuột thành cuộn ngang cho Dock
+                dock.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+
+        // --- C. Tự động căn giữa icon đang chọn (Active) ---
+        const activeLink = dock.querySelector('a.active');
+        if (activeLink) {
+            setTimeout(() => {
+                activeLink.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    inline: 'center', 
+                    block: 'nearest' 
+                });
+            }, 300);
+        }
     }
-}
 });
 
-// Hàm format tiền tệ
+/**
+ * Tiện ích: Định dạng số thành tiền tệ Việt Nam (VND)
+ * @param {number} amount 
+ * @returns {string} ví dụ: 100.000 ₫
+ */
 function formatCurrency(amount) {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 }

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Nội dung hướng dẫn Cài Web App (PWA)
     const pwaGuideHtml = `
         <div class="guide-item">
-            <h3>Cách Cài Web App HVCoder ra Màn hình chính (PWA)</h3>
+            <h3>Cách Cài Web App ra Màn hình chính (PWA)</h3>
             
             <h4>1. Trên iPhone</h4>
             <ol>

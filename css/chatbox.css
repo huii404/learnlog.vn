@@ -99,31 +99,25 @@
 
 /* Định dạng chung tin nhắn */
 .message {
-    max-width: 85%;
     padding: 10px 15px;
     border-radius: 18px;
-    margin-bottom: 10px;
+    font-size: 0.95rem;
     line-height: 1.4;
-    position: relative;
     word-wrap: break-word;
-    animation: fadeInMessage 0.3s ease-out;
 }
 
 /* Tin nhắn của Bot */
 .bot-message {
     background-color: #3a3a5e;
     color: #e0d6ff;
-    border-bottom-left-radius: 4px;
-    margin-right: auto;
+    border-top-left-radius: 4px;
 }
 
 /* Tin nhắn của Người dùng */
 .user-message {
-    background: linear-gradient(90deg, #bb86fc, #9e86ff);
+    background: linear-gradient(135deg, #bb86fc, #9e86ff);
     color: #1a1a2e;
-    border-bottom-right-radius: 4px;
-    margin-left: auto;
-    text-align: right;
+    border-top-right-radius: 4px;
 }
 
 /* Khu vực Input (ĐÃ CHÈN NÚT DẤU +) */
@@ -134,6 +128,74 @@
     background: #1a1a2e;
     align-items: center; /* Căn giữa dọc */
 }
+
+/* Hiệu ứng Typing tối giản */
+.typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 12px 15px;
+}
+
+/* Hiệu ứng gõ máy */
+.typing-dots span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #03dac6;
+    border-radius: 50%;
+    margin-right: 3px;
+    animation: typing 1s infinite;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Avatar trong Header */
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chat-header-avt {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #03dac6;
+}
+
+.header-text h4 { margin: 0; font-size: 1rem; }
+.status-online { font-size: 0.7rem; color: #03dac6; }
+
+/* Cấu trúc tin nhắn kiểu Messenger */
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px; /* Khoảng cách giữa các cụm tin nhắn */
+    max-width: 85%;
+}
+.message-avt {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-bottom: 4px;
+    object-fit: cover;
+}
+
+/* Tin nhắn Bot: Avatar bên trái */
+.bot-wrapper { 
+    align-items: flex-start; 
+    margin-right: auto;
+}
+.bot-wrapper .message-avt { margin-left: 5px; }
+
+/* Tin nhắn User: Avatar bên phải */
+.user-wrapper { 
+    align-items: flex-end; 
+    margin-left: auto;
+}
+.user-wrapper .message-avt { margin-right: 5px; }
 
 /* Nút Dấu + (Menu Toggle) */
 .chatbox-menu-toggle {
@@ -219,15 +281,18 @@
 
 /* === Bổ sung: Gợi ý Từ khóa === */
 .chatbox-suggestions {
-    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap; /* Trượt ngang nếu quá nhiều */
+    overflow-x: auto;
+    padding: 8px 10px;
+    gap: 5px;
     background: #1a1a2e;
     border-top: 1px solid #3a3a5e;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    /* CHÚ Ý: Đã chuyển vị trí hiển thị lên trên input area */
 }
 
+.chatbox-suggestions::-webkit-scrollbar {
+    height: 3px;
+}
 .suggestion-chip {
     padding: 6px 10px;
     border-radius: 20px;
@@ -235,6 +300,7 @@
     color: #03dac6; /* Màu chữ neon */
     font-size: 0.8em;
     cursor: pointer;
+    white-space: nowrap; /* Không xuống dòng chữ trong chip */
     transition: background 0.2s, color 0.2s;
     border: 1px solid #03dac6;
     user-select: none;
