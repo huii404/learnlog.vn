@@ -1,9 +1,0 @@
-{
-  "name": "Thư Viện Code & Chứng Chỉ",
-  "short_name": "HVCoder",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#bb86fc"
-  
-}
