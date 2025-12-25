@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thi Chứng Chỉ Kỹ Thuật</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=EB+Garamond:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="css/chatbox.css">
 </head>
@@ -24,7 +27,7 @@
             <div class="container">
                 <div id="mainSetup" class="quiz-setup exam-mode">
                     <h3>CHẾ ĐỘ THI CHỨNG CHỈ</h3>
-                    <p class="exam-info">Bài thi: 30 câu / 20 phút. Đạt 70% để nhận Bằng Khen!</p>
+                    <p class="exam-info">Bài thi: Tối đa 30 câu / 20 phút. Đạt 70% để nhận Bằng Khen!</p>
                     <select id="examTopicSelect">
                         <option value="">-- Chọn loại chứng chỉ --</option>
                         <option value="exam_programming">Chứng chỉ Lập trình Tổng hợp</option>
@@ -53,8 +56,8 @@
                         <div id="resultDetails" class="result-details"></div>
                         <div class="reward-medals" id="rewardText"></div>
                         <div class="stats-grid">
-                            <div><i class="fas fa-stopwatch"></i> <span id="timeTaken"></span></div>
-                            <div><i class="fas fa-trophy"></i> Rank: <span id="rankText"></span></div>
+                            <div><i class="fas fa-stopwatch"></i> Thời gian: <span id="timeTaken"></span></div>
+                            <div><i class="fas fa-trophy"></i> Xếp loại: <span id="rankText"></span></div>
                         </div>
                         <button id="downloadCertBtn" class="cta-button download-btn" style="display:none;"><i class="fas fa-download"></i> Tải Bằng Khen (PNG)</button>
                         <button id="restartQuizBtn" class="cta-button neon-btn">Thi Lại</button>
@@ -64,34 +67,46 @@
         </section>
     </main>
 
-    <div id="certificateTemplate" style="position: absolute; left: -9999px; top: -9999px;">
+    <div id="certificateTemplate" style="position: fixed; top: -9999px; left: -9999px;">
         <div class="cert-canvas">
-            <div class="cert-inner-border">
-                <div class="cert-header">
-                    <i class="fas fa-award cert-icon"></i>
-                    <h1>BẰNG KHEN VINH DANH</h1>
-                    <p>Hệ thống chứng nhận năng lực share.vn.free</p>
-                </div>
-                <div class="cert-body">
-                    <p>Trân trọng trao tặng cho</p>
-                    <h2 id="certRecipientName">NGUYỄN VĂN A</h2>
-                    <p>Vì đã hoàn thành xuất sắc kỳ thi sát hạch chuyên môn</p>
-                    <h3 id="certSubject">LẬP TRÌNH PYTHON</h3>
-                    <div class="cert-meta">
-                        <span>Xếp loại: <b id="certRank">S</b></span>
-                        <span>Điểm số: <b id="certScore">30/30</b></span>
+            <div class="cert-decorative-line top"></div>
+
+            <div class="cert-content">
+                <h1 class="cert-title">GIẤY CHỨNG NHẬN HOÀN THÀNH</h1>
+                
+                <p class="cert-subtitle">Chứng nhận này được trân trọng trao cho</p>
+                
+                <h2 id="certRecipientName" class="recipient-name">NGUYỄN VĂN A</h2>
+                
+                <p class="cert-text">Đã hoàn thành xuất sắc bài kiểm tra đánh giá năng lực:</p>
+                
+                <h3 id="certSubject" class="subject-title">LẬP TRÌNH VIÊN</h3>
+
+                <div class="cert-details-box">
+                    <div class="detail-item">
+                        <span class="detail-label">Xếp loại</span>
+                        <span id="certRank" class="detail-value">S</span>
                     </div>
-                </div>
-                <div class="cert-footer">
-                    <div class="signature">
-                        <div class="line"></div>
-                        <p>Hội đồng Khảo thí</p>
-                    </div>
-                    <div class="date-stamp">
-                        <p id="certDate"></p>
+                    <div class="detail-separator"></div>
+                    <div class="detail-item">
+                        <span class="detail-label">Điểm số</span>
+                        <span id="certScore" class="detail-value">30/30</span>
                     </div>
                 </div>
             </div>
+
+            <div class="cert-footer">
+                <div class="date-section">
+                    <p id="certDate">Ngày 25 tháng 12 năm 2023</p>
+                    <span class="footer-label">Ngày cấp</span>
+                </div>
+                <div class="signature-section">
+                    <div class="faux-signature">Hệ Thống Sát Hạch</div>
+                    <span class="footer-label">Xác nhận bởi</span>
+                </div>
+            </div>
+            
+            <div class="cert-decorative-line bottom"></div>
         </div>
     </div>
 

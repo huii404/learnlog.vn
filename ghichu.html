@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghi Chú Code - Pro</title>
+    <title>Ghi Chú Code</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/note/ghichu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -13,7 +13,7 @@
         <a href="index.html" title="Gameshow"><i class="fas fa-gamepad"></i><span class="tooltip">Gameshow</span></a>
         <a href="sanpham.html" title="Sản Phẩm"><i class="fas fa-box-archive"></i><span class="tooltip">Sản Phẩm</span></a>
         <a href="ghichu.html" title="Ghi Chú" class="active"><i class="fas fa-sticky-note"></i><span class="tooltip">Ghi Chú</span></a>
-        <a href="vlog.html" title="Vlog" class="active"><i class="fas fa-video"></i><span class="tooltip">Vlog</span></a>
+        <a href="vlog.html" title="Vlog"><i class="fas fa-video"></i><span class="tooltip">Vlog</span></a>
     </nav>
 
     <main class="main-layout">
@@ -24,9 +24,19 @@
                     <input type="text" id="searchInput" placeholder="Tìm kiếm ghi chú...">
                 </div>
                 
-                <select id="categorySelect"></select>
+                <select id="categorySelect">
+                    <option value="all">Tất cả danh mục</option>
+                </select>
+
+                <select id="subCategorySelect">
+                    <option value="all">Tất cả nhánh con</option>
+                </select>
 
                 <div class="sync-group">
+                    <div class="total-badge" title="Tổng số ghi chú hiện có">
+                        <i class="fas fa-layer-group"></i> Tổng: <span id="totalNotesCount">0</span>
+                    </div>
+
                     <a href="archive.html" class="action-btn fav-toggle-btn" style="text-decoration: none;">
                         <i class="fas fa-bookmark"></i> Kho lưu trữ (<span id="favCount">0</span>)
                     </a>
@@ -34,12 +44,14 @@
             </div>
 
             <div class="content-wrapper">
-                <div id="noteGrid" class="note-grid"></div>
+                <div id="noteGrid" class="note-grid">
+                    </div>
             </div>
         </div>
     </main>
 
     <script src="js/note/ghichu-data.js"></script> 
     <script src="js/note/ghichu.js"></script> 
+    <script src="js/chatbox/chatbox-injector.js"></script> 
 </body>
 </html>
