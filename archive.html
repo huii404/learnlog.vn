@@ -4,36 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kho Lưu Trữ - My Notes</title>
+    <link rel="stylesheet" href="css/style.css"> 
     <link rel="stylesheet" href="css/note/ghichu.css">
     <link rel="stylesheet" href="css/note/archive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <div class="archive-container">
-        <header class="archive-header">
-            <div class="header-left">
-                <a href="ghichu.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại</a>
-                <h1><i class="fas fa-bookmark"></i> Ghi chú đã lưu</h1>
-            </div>
+    <nav class="dock-nav" id="dockNav">
+        <a href="index.html" title="Gameshow"><i class="fas fa-gamepad"></i><span class="tooltip">Gameshow</span></a>
+        <a href="sanpham.html" title="Sản Phẩm"><i class="fas fa-box-archive"></i><span class="tooltip">Sản Phẩm</span></a>
+        <a href="ghichu.html" title="Ghi Chú" class="active"><i class="fas fa-sticky-note"></i><span class="tooltip">Ghi Chú</span></a>
+        <a href="vlog.html" title="Vlog"><i class="fas fa-video"></i><span class="tooltip">Vlog</span></a>
+    </nav>
+
+    <main class="main-layout">
+        <div class="archive-container">
+            <header class="archive-header">
+                <div class="header-left">
+                    <a href="ghichu.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                    <h1><i class="fas fa-bookmark"></i> Ghi chú đã lưu</h1>
+                </div>
+                
+                <div class="sync-group">
+                    <button onclick="exportArchivePDF()" class="action-btn pdf-btn" title="Xuất PDF">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </button>
+                    <button onclick="downloadBackup()" class="action-btn backup-btn" title="Tải file .json">
+                        <i class="fas fa-download"></i> Sao lưu
+                    </button>
+                    <input type="file" id="importFile" style="display:none" onchange="importBackup(event)">
+                    <button onclick="document.getElementById('importFile').click()" class="action-btn sync-btn" title="Nhập file .json">
+                        <i class="fas fa-sync-alt"></i> Đồng bộ
+                    </button>
+                </div>
+            </header>
             
-            <div class="sync-group">
-                <button onclick="exportArchivePDF()" class="action-btn pdf-btn" title="Xuất PDF">
-                    <i class="fas fa-file-pdf"></i> PDF
-                </button>
-                <button onclick="downloadBackup()" class="action-btn backup-btn" title="Tải file .json">
-                    <i class="fas fa-download"></i> Sao lưu
-                </button>
-                <input type="file" id="importFile" style="display:none" onchange="importBackup(event)">
-                <button onclick="document.getElementById('importFile').click()" class="action-btn sync-btn" title="Nhập file .json">
-                    <i class="fas fa-sync-alt"></i> Đồng bộ
-                </button>
-            </div>
-        </header>
-        
-        <div id="archiveGrid" class="note-grid">
-            </div>
-    </div>
+            <div id="archiveGrid" class="note-grid">
+                </div>
+        </div>
+    </main>
 
     <script src="js/note/ghichu-data.js"></script>
     <script src="js/note/archive.js"></script>
