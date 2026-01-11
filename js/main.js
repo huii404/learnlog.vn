@@ -1,43 +1,16 @@
-/**
- * file: main.js
- * Chứa logic điều hướng, thanh Dock macOS cải tiến và các tiện ích chung.
- */
-// Khởi tạo hoặc lấy dữ liệu tracking từ LocalStorage
-let userStats = JSON.parse(localStorage.getItem('userStats')) || {
-    username: "Guest",
-    loginCount: 0,
-    clicks: { product: 0, note: 0, quiz: 0, vlog: 0 },
-    lastLogin: new Date().toLocaleDateString()
-};
-
-// Hàm ghi nhận click
-function trackClick(type) {
-    if (userStats.clicks.hasOwnProperty(type)) {
-        userStats.clicks[type]++;
-        localStorage.setItem('userStats', JSON.stringify(userStats));
-    }
-}
-
-// Tự động gán sự kiện track cho các trang
-document.addEventListener('click', (e) => {
-    if (window.location.pathname.includes('sanpham')) trackClick('product');
-    if (window.location.pathname.includes('ghichu')) trackClick('note');
-    if (window.location.pathname.includes('index')) trackClick('quiz');
-    
-});
 document.addEventListener('DOMContentLoaded', function() {
     
     console.log("Hệ thống đã sẵn sàng!");
 
     // ===============================================
-    // 1. XỬ LÝ TRẠNG THÁI ACTIVE TRÊN NAVBAR & DOCK
+    // 1. XỬ LÝ TRẠNG THÁI ACTIVE TRÊN NAVBAR & DOCK (CŨ - ĐÃ BỎ)
     // ===============================================
+    // (Giữ lại đoạn này nếu bạn còn dùng navbar cũ ở đâu đó, không thì có thể xóa)
     const navLinks = document.querySelectorAll('.nav-links a, .dock-nav a'); 
     const currentPath = window.location.pathname.split("/").pop();
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href').split("/").pop();
-        // Kiểm tra nếu là trang chủ hoặc khớp tên file
         if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
             link.classList.add('active');
         }
@@ -58,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ===============================================
-    // 3. LOGIC HAMBURGER MENU (MOBILE)
+    // 3. LOGIC HAMBURGER MENU (MOBILE) - CŨ
     // ===============================================
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const mainNavLinks = document.querySelector('.navbar .nav-links'); 
@@ -77,71 +50,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // =============================================================
-    // 4. LOGIC CẢI TIẾN THANH DOCK: PHÓNG TO & CUỘN TRÁI/PHẢI
-    // =============================================================
-    const dock = document.getElementById('dockNav');
-    if (dock) {
-        const dockIcons = dock.querySelectorAll('a');
+        // ===============================================
+    // SIDEBAR MENU TOGGLE - HAMBURGER HIỆN/ẨN KHI MỞ
+    // ===============================================
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const menuCloseBtn = document.getElementById('menuCloseBtn');
 
-        // --- A. Hiệu ứng phóng to kiểu macOS (Chỉ dành cho Desktop) ---
-        if (window.innerWidth > 1024) {
-            const maxScale = 1.3;     // Phóng to tối đa 1.3 lần
-            const effectRadius = 150; // Khoảng cách chuột bắt đầu tác động
+    if (menuToggleBtn && sidebarMenu && sidebarOverlay && menuCloseBtn) {
+        // Mở menu → ẩn nút hamburger
+        menuToggleBtn.addEventListener('click', () => {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            menuToggleBtn.classList.add('hidden'); // Ẩn nút 3 gạch
+            document.body.style.overflow = 'hidden';
+        });
 
-            dock.addEventListener('mousemove', function(e) {
-                const dockRect = dock.getBoundingClientRect();
-                const mouseX = e.clientX - dockRect.left;
+        // Đóng menu → hiện lại nút hamburger
+        const closeMenu = () => {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            menuToggleBtn.classList.remove('hidden'); // Hiện lại nút
+            document.body.style.overflow = '';
+        };
 
-                dockIcons.forEach(icon => {
-                    const iconRect = icon.getBoundingClientRect();
-                    const iconCenterX = (iconRect.left - dockRect.left) + (iconRect.width / 2);
-                    const distance = Math.abs(mouseX - iconCenterX);
-                    
-                    let scale = 1;
-                    if (distance < effectRadius) {
-                        const scaleFactor = (1 - distance / effectRadius);
-                        // Sử dụng hàm Cosine để hiệu ứng chuyển đổi scale mượt mà hơn
-                        scale = 1 + (maxScale - 1) * Math.cos((1 - scaleFactor) * (Math.PI / 2));
-                    }
-                    
-                    // Áp dụng biến đổi: phóng to và đẩy nhẹ icon lên trên (translateY)
-                    icon.style.transform = `scale(${scale.toFixed(2)}) translateY(${(1 - scale) * 15}px)`;
-                    // Tạo lề động để các icon không đè lên nhau khi to ra
-                    icon.style.margin = `0 ${(scale - 1) * 10}px`; 
-                });
-            });
+        menuCloseBtn.addEventListener('click', closeMenu);
+        sidebarOverlay.addEventListener('click', closeMenu);
 
-            // Reset trạng thái khi chuột rời khỏi Dock
-            dock.addEventListener('mouseleave', function() {
-                dockIcons.forEach(icon => {
-                    icon.style.transform = 'scale(1) translateY(0px)';
-                    icon.style.margin = '0';
-                });
-            });
-        }
-
-        // --- B. Tính năng cuộn ngang bằng bánh xe chuột ---
-        // Cho phép người dùng lăn chuột để kéo thanh Dock sang trái/phải
-        dock.addEventListener('wheel', function(e) {
-            if (e.deltaY !== 0) {
-                e.preventDefault();
-                // Chuyển hướng cuộn dọc của chuột thành cuộn ngang cho Dock
-                dock.scrollLeft += e.deltaY;
+        // Highlight link trang hiện tại
+        const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === currentPath || (currentPath === '' && linkHref === 'index.html')) {
+                link.classList.add('active');
             }
-        }, { passive: false });
-
-        // --- C. Tự động căn giữa icon đang chọn (Active) ---
-        const activeLink = dock.querySelector('a.active');
-        if (activeLink) {
-            setTimeout(() => {
-                activeLink.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    inline: 'center', 
-                    block: 'nearest' 
-                });
-            }, 300);
-        }
+        });
     }
 });
 

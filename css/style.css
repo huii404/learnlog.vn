@@ -268,88 +268,146 @@ footer {
         font-size: 1.1em;
     }
 }
-/* ===================================== */
-/* MỚI: Thanh Điều Hướng Kiểu macOS Dock */
-/* ===================================== */
-.dock-nav {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1001;
-    
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    padding: 10px 20px;
-    height: 70px; /* Chiều cao cố định */
-    
-    /* QUAN TRỌNG: Giới hạn kích thước và cho phép trượt */
-    width: auto;
-    max-width: 90vw;           /* Không vượt quá 90% chiều rộng màn hình */
-    overflow-x: auto;          /* Hiện thanh cuộn khi vượt quá chiều rộng */
-    overflow-y: hidden;        /* Chặn cuộn dọc */
-    white-space: nowrap;       /* Giữ tất cả icon trên 1 hàng duy nhất */
-    
-    /* Giao diện Dark Glass */
-    background: rgba(20, 20, 35, 0.7);
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(187, 134, 252, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+/* ============================================ */
+/* SIDEBAR MENU BÊN TRÁI - PHIÊN BẢN NÂNG CẤP ĐẸP HƠN */
+/* ============================================ */
 
-    /* Ẩn thanh cuộn vật lý để trông sạch sẽ hơn */
-    scrollbar-width: none;       /* Firefox */
-    -ms-overflow-style: none;    /* IE/Edge */
+.menu-toggle-btn {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(30, 30, 50, 0.6);
+    border: 1.5px solid #bb86fc;
+    border-radius: 50%;
+    color: #bb86fc;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1010;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(187, 134, 252, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-toggle-btn:hover {
+    background: #bb86fc;
+    color: #1a1a2e;
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 0 25px rgba(187, 134, 252, 0.8);
+}
+.menu-toggle-btn.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Không click được khi ẩn */
+}
+.sidebar-menu {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(20, 20, 35, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(187, 134, 252, 0.4);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
+    z-index: 1009;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Tăng tốc độ */
+    padding: 25px 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sidebar-menu.active {
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(187, 134, 252, 0.3);
+}
+
+.sidebar-header h3 {
+    font-size: 1.6rem;
+    color: #bb86fc;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.menu-close-btn {
+    background: none;
+    border: none;
+    color: #ff5252;
+    font-size: 2.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     transition: all 0.3s ease;
 }
 
-.dock-nav::-webkit-scrollbar {
-    display: none;
+.menu-close-btn:hover {
+    background: rgba(255, 82, 82, 0.2);
+    transform: scale(1.1);
 }
-.dock-nav a {
-    flex: 0 0 auto;             /* Ngăn icon bị co rúm lại */
-    color: #bb86fc;             /* Màu tím đặc trưng của bạn */
-    font-size: 26px;
-    padding: 10px;
+
+.sidebar-links li {
+    margin: 12px 0;
+}
+
+.sidebar-links a {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: #e0d6ff;
     text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    padding: 14px 18px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
     position: relative;
-    transition: transform 0.2s ease;
 }
 
-/* Chấm báo hiệu trang đang active */
-.dock-nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background-color: #50b3a2;
-    border-radius: 50%;
+.sidebar-links a i {
+    font-size: 1.4rem;
+    width: 30px;
+    text-align: center;
 }
 
-/* Nhãn tên của icon khi hover */
-.dock-nav a .tooltip {
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #bb86fc;
+.sidebar-links a:hover {
+    background: rgba(187, 134, 252, 0.25);
+    color: #fff;
+    transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+}
+
+.sidebar-links a.active {
+    background: linear-gradient(90deg, #bb86fc, #9f74d8);
     color: #1a1a2e;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    pointer-events: none;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(187, 134, 252, 0.5);
 }
 
-.dock-nav a:hover .tooltip {
+.sidebar-overlay.active {
     opacity: 1;
     visibility: visible;
+    backdrop-filter: blur(5px);
 }

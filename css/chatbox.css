@@ -5,7 +5,7 @@
 /* Container và nút ẩn/hiện */
 .chatbox-container {
     position: fixed;
-    bottom: 100px; /* Cách đáy 20px */
+    bottom: 30px; /* Cách đáy 20px */
     right: 30px; /* Cách bên phải 20px */
     z-index: 1017; /* Cao hơn Dock Nav (1001) */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -55,13 +55,28 @@
 
 <body>
 
-    <nav class="dock-nav" id="dockNav">
-        <a href="index.html" title="Gameshow"><i class="fas fa-gamepad"></i></a>
-        <a href="sanpham.html" title="Sản Phẩm"><i class="fas fa-box-archive"></i></a>
-        <a href="ghichu.html" title="Ghi Chú"><i class="fas fa-sticky-note"></i></a>
-        <a href="vlog.html" title="Vlog"><i class="fas fa-video"></i></a>
-        <a href="profile.html" title="Cá nhân" class="active"><i class="fas fa-user-astronaut"></i></a>
-    </nav>
+<!-- NEW: Left Sidebar Menu Button -->
+<button class="menu-toggle-btn" id="menuToggleBtn" title="Menu">
+    <i class="fas fa-bars"></i> <!-- Icon 3 gạch ngang (hamburger) -->
+</button>
+
+<!-- NEW: Sidebar Menu -->
+<nav class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button class="menu-close-btn" id="menuCloseBtn">&times;</button>
+    </div>
+    <ul class="sidebar-links">
+        <li><a href="index.html" class="sidebar-link"><i class="fas fa-gamepad"></i> Gameshow</a></li>
+        <li><a href="sanpham.html" class="sidebar-link"><i class="fas fa-box-archive"></i> Sản Phẩm</a></li>
+        <li><a href="knowledge.html" class="sidebar-link"><i class="fas fa-sticky-note"></i>Kiến thức</a></li>
+        <li><a href="pet-universe.html" class="sidebar-link active"><i class="fas fa-paw"></i> Nuôi Thú Cưng</a></li>
+        <!-- Thêm các trang khác nếu có -->
+    </ul>
+</nav>
+
+<!-- Overlay khi mở menu (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <main>
         <div class="container page-layout">
