@@ -1,96 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
   const allProductGrid = document.getElementById("allProductGrid");
-  const categoryFilterContainer = document.getElementById("categoryFilter");
   const searchInput = document.getElementById("searchInput");
-  const sortBySelect = document.getElementById("sortBy");
   const paginationControls = document.getElementById("paginationControls");
   const productCountElement = document.getElementById("productCount");
 
-  // Các thành phần cho QR Modal
-  const qrModal = document.getElementById("qrModal");
-  const closeQrModalBtn = document.getElementById("closeQrModal");
-  const qrcodeContainer = document.getElementById("qrcodeContainer");
-  const qrProductLinkText = document.getElementById("qrProductLink");
+  // Elements cho Drawer Menu
+  const verticalMenu = document.getElementById("verticalMenu");
+  const mainMenu = document.getElementById("mainMenu");
+  const menuAllBtn = document.getElementById("menuAllBtn");
+  const closeDrawer = document.getElementById("closeDrawer");
+  const drawerOverlay = document.getElementById("drawerOverlay");
 
-  // ⚠️ ĐÃ NÂNG CẤP: Thêm BASE_URL để tạo đường dẫn tuyệt đối cho QR Code
-  // Thay thế bằng domain chính thức của bạn (hiện tại là GitHub Pages)
   const BASE_URL = "https://huiinguen.github.io/share.vn.free/";
-
   const productsPerPage = 8;
   let currentPage = 1;
-  let currentFilters = {
-    category: "all",
-    subCategory: null,
-    searchTerm: "",
-    sortBy: "newest",
-  };
-  let filteredProducts = [];
-  let searchTimeout;
+  let currentFilters = { category: "all", subCategory: null, searchTerm: "" };
 
-  const filterToggleBtn = document.getElementById("filterToggle");
-  const sidebarFilters = document.getElementById("sidebarFilters");
-  const closeFilterBtn = document.getElementById("closeFilterBtn");
-  const sidebarOverlay = document.getElementById("sidebarOverlay");
+  if (typeof allProducts === "undefined" || allProducts.length === 0) return;
 
-  if (typeof allProducts === "undefined" || allProducts.length === 0) {
-    if (allProductGrid) {
-      allProductGrid.innerHTML =
-        "<p>Không có sản phẩm nào để hiển thị. Vui lòng kiểm tra lại dữ liệu.</p>";
-    }
-    return;
-  }
-
-  // ===========================================
-  // HÀM XỬ LÝ LỌC & SẮP XẾP
-  // ===========================================
-
-  function updateUrl() {
-    const urlParams = new URLSearchParams();
-    if (currentFilters.category && currentFilters.category !== "all")
-      urlParams.set("category", currentFilters.category);
-    if (currentFilters.subCategory)
-      urlParams.set("subCategory", currentFilters.subCategory);
-    if (currentFilters.searchTerm)
-      urlParams.set("search", currentFilters.searchTerm);
-    if (currentFilters.sortBy !== "newest")
-      urlParams.set("sortBy", currentFilters.sortBy);
-    if (currentPage > 1) urlParams.set("page", currentPage);
-
-    window.history.replaceState({}, "", `sanpham.html?${urlParams.toString()}`);
-  }
-
-  function restoreFiltersFromUrl() {
-    // Ưu tiên: Nếu có dữ liệu quay lại từ trang chi tiết → dùng nó
-    const savedState = sessionStorage.getItem("productListReturnState");
-    let params;
-
-    if (savedState && savedState !== "") {
-      params = new URLSearchParams(savedState);
-      // Xóa sau khi dùng (chỉ dùng 1 lần)
-      sessionStorage.removeItem("productListReturnState");
-    } else {
-      // Nếu không có lưu trước → dùng URL hiện tại
-      params = new URLSearchParams(window.location.search);
-    }
-
-    currentFilters.category = params.get("category") || "all";
-    currentFilters.subCategory = params.get("subCategory") || null;
-    currentFilters.searchTerm = params.get("search") || "";
-    currentFilters.sortBy = params.get("sortBy") || "newest";
-    currentPage = parseInt(params.get("page")) || 1;
-
-    // Cập nhật giao diện
-    if (searchInput) searchInput.value = currentFilters.searchTerm;
-    if (sortBySelect) sortBySelect.value = currentFilters.sortBy;
-  }
-
-  // Hàm hiển thị sản phẩm
+  // --- 1. HIỂN THỊ DANH SÁCH SẢN PHẨM ---
   function displayProducts(products, page) {
     if (!allProductGrid) return;
     allProductGrid.innerHTML = "";
     const start = (page - 1) * productsPerPage;
-    const end = start + productsPerPage;
-    const productsToDisplay = products.slice(start, end);
+    const productsToDisplay = products.slice(start, start + productsPerPage);
 
     if (productsToDisplay.length === 0) {
       allProductGrid.innerHTML =
@@ -99,385 +32,215 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     productsToDisplay.forEach((product) => {
-      const relativeProductPath = `sanpham_chitiet.html?id=${product.id}`;
-      const productLinkForQr = BASE_URL + relativeProductPath;
+      const card = document.createElement("div");
+      card.className = "product-card";
 
-      const productCard = document.createElement("div");
-      productCard.classList.add("product-card");
+      // Lấy link từ resourceLink trong data, nếu không có thì dùng link hiện tại của trang
+      const linkToShare =
+        product.resourceLink || `${BASE_URL}sanpham.html?id=${product.id}`;
 
-      // Đã xóa phần tính toán priceClass và priceText
-      const productLinkContent = document.createElement("a");
-      productLinkContent.href = `sanpham_chitiet.html?id=${product.id}`;
-      productLinkContent.classList.add("product-card-link-content");
-
-      // Chỉ giữ lại Tiêu đề, xóa thẻ <p class="price">
-      productLinkContent.innerHTML = `
+      card.innerHTML = `
+        <div class="product-card-link-content" onclick="openProductModal(${product.id})" style="cursor:pointer">
             <h3 class="san-pham__title">${product.name}</h3>
-        `;
-
-      const shareButton = document.createElement("button");
-      shareButton.classList.add("share-icon-btn");
-      shareButton.innerHTML = '<i class="fas fa-qrcode"></i>';
-      shareButton.setAttribute("data-product-url", productLinkForQr);
-
-      shareButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        openQrModal(this.getAttribute("data-product-url"));
-      });
-
-      productCard.appendChild(productLinkContent);
-      productCard.appendChild(shareButton);
-      allProductGrid.appendChild(productCard);
+        </div>
+        <button class="share-icon-btn" onclick="openQrModal('${linkToShare}')">
+            <i class="fas fa-qrcode"></i>
+        </button>
+    `;
+      allProductGrid.appendChild(card);
     });
+  }
+
+  // --- 2. LOGIC LỌC VÀ PHÂN TRANG ---
+  function filterAndSortProducts() {
+    let results = allProducts.filter((p) => {
+      const matchCat =
+        currentFilters.category === "all" ||
+        p.category === currentFilters.category;
+      const matchSub =
+        !currentFilters.subCategory ||
+        p.subCategory === currentFilters.subCategory;
+      const matchSearch = p.name
+        .toLowerCase()
+        .includes(currentFilters.searchTerm.toLowerCase());
+      return matchCat && matchSub && matchSearch;
+    });
+    results.sort((a, b) => (b.id || 0) - (a.id || 0));
+    displayProducts(results, currentPage);
+    setupPagination(results);
+    if (productCountElement)
+      productCountElement.textContent = `Số sản phẩm: ${results.length}`;
   }
 
   function setupPagination(products) {
     if (!paginationControls) return;
     paginationControls.innerHTML = "";
-
     const pageCount = Math.ceil(products.length / productsPerPage);
     if (pageCount <= 1) return;
-
-    const prevBtn = document.createElement("button");
-    prevBtn.textContent = "Trước";
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.addEventListener("click", () => {
-      currentPage--;
-      updateUrl();
-      filterAndSortProducts();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-    paginationControls.appendChild(prevBtn);
-
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(pageCount, currentPage + 2);
-
-    if (currentPage <= 3) {
-      endPage = Math.min(pageCount, 5);
-      startPage = 1;
-    } else if (currentPage > pageCount - 2) {
-      startPage = Math.max(1, pageCount - 4);
-      endPage = pageCount;
-    }
-
-    if (startPage > 1) {
-      const dotBtn = document.createElement("span");
-      dotBtn.textContent = "...";
-      paginationControls.appendChild(dotBtn);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      const pageBtn = document.createElement("button");
-      pageBtn.textContent = i;
-      if (i === currentPage) {
-        pageBtn.classList.add("active");
-      }
-      pageBtn.addEventListener("click", () => {
+    for (let i = 1; i <= pageCount; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add("active");
+      btn.onclick = () => {
         currentPage = i;
-        updateUrl();
         filterAndSortProducts();
         window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-      paginationControls.appendChild(pageBtn);
-    }
-
-    if (endPage < pageCount) {
-      const dotBtn = document.createElement("span");
-      dotBtn.textContent = "...";
-      paginationControls.appendChild(dotBtn);
-    }
-
-    const nextBtn = document.createElement("button");
-    nextBtn.textContent = "Sau";
-    nextBtn.disabled = currentPage === pageCount;
-    nextBtn.addEventListener("click", () => {
-      currentPage++;
-      updateUrl();
-      filterAndSortProducts();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-    paginationControls.appendChild(nextBtn);
-  }
-
-  function updateProductCount(count) {
-    if (productCountElement) {
-      productCountElement.textContent = `Số sản phẩm: ${count}`;
+      };
+      paginationControls.appendChild(btn);
     }
   }
 
-  function filterAndSortProducts() {
-    let results = [...allProducts];
-
-    if (currentFilters.category && currentFilters.category !== "all") {
-      results = results.filter((p) => p.category === currentFilters.category);
-    }
-    if (currentFilters.subCategory) {
-      results = results.filter(
-        (p) => p.subCategory === currentFilters.subCategory
-      );
-    }
-
-    if (currentFilters.searchTerm) {
-      const searchTermLower = currentFilters.searchTerm.toLowerCase();
-      results = results.filter(
-        (p) =>
-          p.name.toLowerCase().includes(searchTermLower) ||
-          (p.description &&
-            p.description.toLowerCase().includes(searchTermLower)) ||
-          (p.category && p.category.toLowerCase().includes(searchTermLower))
-      );
-    }
-
-    if (currentFilters.sortBy) {
-        switch (currentFilters.sortBy) {
-            case 'newest':
-            default:
-                results.sort((a, b) => (b.id || 0) - (a.id || 0)); 
-                break;
-        }
-    }
-
-    const maxPage = Math.ceil(results.length / productsPerPage);
-    if (currentPage > maxPage && maxPage > 0) {
-      currentPage = maxPage;
-    } else if (results.length === 0) {
-      currentPage = 1;
-    }
-
-    filteredProducts = results;
-    displayProducts(filteredProducts, currentPage);
-    setupPagination(filteredProducts);
-    updateProductCount(filteredProducts.length);
-  }
-
-  function setupCategoryFilters() {
-    if (!categoryFilterContainer) return;
-    categoryFilterContainer.innerHTML = "";
-
-    const allItemLi = document.createElement("li");
-    allItemLi.classList.add("category-item", "all-products-item");
-    allItemLi.innerHTML = `
-            <label>
-                <input type="radio" name="category" value="all" ${
-                  currentFilters.category === "all" ? "checked" : ""
-                }>
-                Tất cả sản phẩm
-            </label>
-        `;
-    categoryFilterContainer.appendChild(allItemLi);
-
-    const categoriesWithSub = {};
-    allProducts.forEach((p) => {
-      if (!categoriesWithSub[p.category]) {
-        categoriesWithSub[p.category] = new Set();
-      }
-      if (p.subCategory) {
-        categoriesWithSub[p.category].add(p.subCategory);
-      }
-    });
-
-    for (const category in categoriesWithSub) {
-      const categoryLi = document.createElement("li");
-      categoryLi.classList.add("category-item");
-
-      const isCategoryActive =
-        currentFilters.category === category && !currentFilters.subCategory;
-
-      let shouldExpand = isCategoryActive;
-      if (categoriesWithSub[category].has(currentFilters.subCategory)) {
-        shouldExpand = true;
-      }
-      if (shouldExpand) {
-        categoryLi.classList.add("expanded");
-      }
-
-      const categoryTitleDiv = document.createElement("div");
-      categoryTitleDiv.classList.add("category-title");
-      categoryTitleDiv.innerHTML = `
-                <label>
-                    <input type="radio" name="category" value="${category}" ${
-        isCategoryActive && !currentFilters.subCategory ? "checked" : ""
-      }>
-                    ${category}
-                </label>
-                <i class="fas fa-chevron-right toggle-icon"></i>
-            `;
-      categoryLi.appendChild(categoryTitleDiv);
-
-      if (categoriesWithSub[category].size > 0) {
-        const subCategoryUl = document.createElement("ul");
-        subCategoryUl.classList.add("subcategory-list");
-        categoriesWithSub[category].forEach((subCat) => {
-          const subCategoryLi = document.createElement("li");
-          const isSubCategoryActive = currentFilters.subCategory === subCat;
-          subCategoryLi.innerHTML = `
-                        <label>
-                            <input type="radio" name="subCategory" value="${subCat}" ${
-            isSubCategoryActive ? "checked" : ""
-          }>
-                            ${subCat}
-                        </label>
-                    `;
-          subCategoryUl.appendChild(subCategoryLi);
-        });
-        categoryLi.appendChild(subCategoryUl);
-
-        categoryTitleDiv.addEventListener("click", (e) => {
-          const targetInput = e.target.closest("label")?.querySelector("input");
-          if (!targetInput || targetInput.name !== "category") {
-            document.querySelectorAll(".category-item").forEach((item) => {
-              if (item !== categoryLi) {
-                item.classList.remove("expanded");
-              }
-            });
-            categoryLi.classList.toggle("expanded");
-            e.stopPropagation();
-          }
-        });
-      }
-      categoryFilterContainer.appendChild(categoryLi);
-    }
-  }
-
-  function initializeFilters() {
-    restoreFiltersFromUrl();
-    setupCategoryFilters();
-
-    if (categoryFilterContainer) {
-      categoryFilterContainer.addEventListener("change", (e) => {
-        const target = e.target;
-        if (target.name === "category") {
-          currentFilters.category = target.value;
-          currentFilters.subCategory = null;
-          const subRadios = categoryFilterContainer.querySelectorAll(
-            'input[name="subCategory"]'
-          );
-          subRadios.forEach((radio) => (radio.checked = false));
-        } else if (target.name === "subCategory") {
-          currentFilters.subCategory = target.value;
-          const parentCategory = target
-            .closest(".category-item")
-            .querySelector('input[type="radio"]').value;
-          currentFilters.category = parentCategory;
-          target
-            .closest(".category-item")
-            .querySelector('input[type="radio"]').checked = true;
-        }
-        currentPage = 1;
-        updateUrl();
-        filterAndSortProducts();
-        closeSidebar();
-      });
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener("input", () => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          currentFilters.searchTerm = searchInput.value.trim();
-          currentPage = 1;
-          updateUrl();
-          filterAndSortProducts();
-        }, 300);
-      });
-    }
-    if (sortBySelect) {
-      sortBySelect.addEventListener("change", () => {
-        currentFilters.sortBy = sortBySelect.value;
-        currentPage = 1;
-        updateUrl();
-        filterAndSortProducts();
-      });
-    }
-
+  // --- 3. KHỞI TẠO MENU & TÌM KIẾM ---
+  searchInput.oninput = () => {
+    currentFilters.searchTerm = searchInput.value.trim();
+    currentPage = 1;
     filterAndSortProducts();
+  };
+
+  // (Các hàm initVerticalMenu, toggleDrawer... giữ nguyên như bản cũ của bạn)
+  function initVerticalMenu() {
+    const categories = [...new Set(allProducts.map((p) => p.category))];
+    let menuHTML = `<li class="category-item"><a class="category-link" onclick="handleMenuClick('all', 'all')"><i class="fas fa-globe"></i> Tất cả</a></li>`;
+    categories.forEach((cat) => {
+      const subCats = [
+        ...new Set(
+          allProducts
+            .filter((p) => p.category === cat && p.subCategory)
+            .map((p) => p.subCategory)
+        ),
+      ];
+      menuHTML += `<li class="category-item"><div class="category-link" onclick="toggleSubMenu(this)"><span><i class="fas fa-folder"></i> ${cat}</span><i class="fas fa-chevron-right arrow-icon"></i></div><ul class="vertical-sub-menu"><li><a onclick="handleMenuClick('${cat}', 'all')">Xem tất cả</a></li>${subCats
+        .map(
+          (sc) =>
+            `<li><a onclick="handleMenuClick('${cat}', '${sc}')">${sc}</a></li>`
+        )
+        .join("")}</ul></li>`;
+    });
+    mainMenu.innerHTML = menuHTML;
   }
-
-  // ===========================================
-  // HÀM XỬ LÝ SIDEBAR (MOBILE)
-  // ===========================================
-  function openSidebar() {
-    sidebarFilters.classList.add("active");
-    sidebarOverlay.classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeSidebar() {
-    sidebarFilters.classList.remove("active");
-    sidebarOverlay.classList.remove("active");
-    document.body.style.overflow = "";
-  }
-
-  if (filterToggleBtn) {
-    filterToggleBtn.addEventListener("click", openSidebar);
-  }
-
-  if (closeFilterBtn) {
-    closeFilterBtn.addEventListener("click", closeSidebar);
-  }
-
-  if (sidebarOverlay) {
-    sidebarOverlay.addEventListener("click", closeSidebar);
-  }
-
-  // ===========================================
-  // HÀM XỬ LÝ QR CODE MODAL
-  // ===========================================
-
-  function openQrModal(productUrl) {
-    // Xóa nội dung cũ
-    qrcodeContainer.innerHTML = "";
-
-    // Cập nhật URL trong modal
-    qrProductLinkText.textContent = productUrl;
-
-    // KIỂM TRA: Đảm bảo thư viện QRCode đã được tải
-    if (typeof QRCode !== "undefined") {
-      // Kích thước QR (ví dụ: 180x180)
-      new QRCode(qrcodeContainer, {
-        text: productUrl, // Sử dụng URL tuyệt đối
-        width: 180,
-        height: 180,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H,
-      });
-    } else {
-      // Thông báo nếu thư viện chưa tải
-      qrcodeContainer.innerHTML =
-        "<p>Thư viện QR Code (QRCode.js) chưa được tải. Vui lòng kiểm tra lại file HTML.</p>";
-    }
-
-    // Hiển thị modal
-    qrModal.style.display = "block";
-    document.body.style.overflow = "hidden"; // Ngăn cuộn nền
-  }
-
-  // Đóng Modal khi nhấn nút 'x'
-  if (closeQrModalBtn) {
-    closeQrModalBtn.onclick = function () {
-      qrModal.style.display = "none";
-      document.body.style.overflow = "";
-      qrcodeContainer.innerHTML = ""; // Dọn dẹp mã QR
+  window.toggleSubMenu = (el) => el.parentElement.classList.toggle("open");
+  window.handleMenuClick = (cat, sub) => {
+    currentFilters.category = cat;
+    currentFilters.subCategory = sub === "all" ? null : sub;
+    currentPage = 1;
+    filterAndSortProducts();
+    verticalMenu.classList.remove("open");
+    drawerOverlay.classList.remove("show");
+  };
+  if (menuAllBtn)
+    menuAllBtn.onclick = () => {
+      verticalMenu.classList.add("open");
+      drawerOverlay.classList.add("show");
     };
-  }
-
-  // Đóng Modal khi nhấn ra ngoài
-  if (qrModal) {
-    window.onclick = function (event) {
-      if (event.target == qrModal) {
-        qrModal.style.display = "none";
-        document.body.style.overflow = "";
-        qrcodeContainer.innerHTML = ""; // Dọn dẹp mã QR
-      }
+  if (closeDrawer)
+    closeDrawer.onclick = () => {
+      verticalMenu.classList.remove("open");
+      drawerOverlay.classList.remove("show");
     };
-  }
 
-  // KHỞI TẠO
-  initializeFilters();
+  initVerticalMenu();
+  filterAndSortProducts();
 });
 
-function formatCurrency(price) {
-  return price.toLocaleString("vi-VN") + "đ";
-}
+// --- 4. HÀM MỞ MODAL CHI TIẾT (PHẢI NẰM NGOÀI DOMContentLoaded) ---
+window.openProductModal = function (id) {
+  const modal = document.getElementById("productModal");
+  const content = document.getElementById("modalBodyContent");
+  const product = allProducts.find((p) => p.id === id);
+
+  if (!product || !modal || !content) return;
+
+  const functionsHtml = product.functions
+    ? `<div class="product-details-section"><h3>Tính năng</h3><ul class="professional-list">${product.functions
+        .split("\n")
+        .map((f) => `<li><i class="fas fa-check"></i> ${f.trim()}</li>`)
+        .join("")}</ul></div>`
+    : "";
+
+  content.innerHTML = `
+        <div class="product-detail">
+            <div class="product-gallery">
+                <img src="${
+                  product.images_gallery[0] || "images/placeholder.png"
+                }" style="width:100%; border-radius:10px;">
+            </div>
+            <div class="product-info-content">
+                <h1 style="color:#fff">${product.name}</h1>
+                <p style="color:#bb86fc"><i class="fas fa-tags"></i> Danh mục: ${
+                  product.category
+                }</p>
+                <div class="new-actions" style="display:flex; gap:10px; margin: 20px 0;">
+                    <a href="${
+                      product.resourceLink
+                    }" target="_blank" class="cta-button visit-btn" style="background:#03dac6; color:#000; flex:1; text-align:center; padding:12px; border-radius:8px; font-weight:bold; text-decoration:none;">
+                        <i class="fas fa-external-link-alt"></i> TRUY CẬP
+                    </a>
+                </div>
+                <div class="product-details-section">
+                    <h3>Mô tả</h3>
+                    <p>${product.description || "Đang cập nhật..."}</p>
+                </div>
+                ${functionsHtml}
+            </div>
+        </div>
+    `;
+
+  modal.style.display = "flex"; // Hiện modal
+  document.body.style.overflow = "hidden"; // Chặn cuộn trang
+};
+
+// Đóng modal
+window.closeDetail = function () {
+  document.getElementById("productModal").style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+document.getElementById("closeProductModal").onclick = window.closeDetail;
+window.onclick = (e) => {
+  if (e.target.id === "productModal") window.closeDetail();
+};
+// --- 5. HÀM XỬ LÝ QR CODE ---
+
+window.openQrModal = function (link) {
+    const qrModal = document.getElementById("qrModal");
+    const qrcodeContainer = document.getElementById("qrcodeContainer");
+    const qrProductLink = document.getElementById("qrProductLink");
+
+    if (!qrModal || !qrcodeContainer) return;
+
+    // Xóa mã QR cũ nếu có
+    qrcodeContainer.innerHTML = "";
+
+    // Tạo mã QR mới
+    new QRCode(qrcodeContainer, {
+        text: link,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    // Hiển thị text link bên dưới (tùy chọn)
+    if (qrProductLink) {
+        qrProductLink.textContent = link;
+    }
+
+    // Hiển thị Modal
+    qrModal.style.display = "block";
+};
+
+// Hàm đóng QR Modal
+window.closeQrModal = function () {
+    document.getElementById("qrModal").style.display = "none";
+};
+
+// Gán sự kiện đóng cho nút X và click ra ngoài
+document.getElementById("closeQrModal").onclick = window.closeQrModal;
+
+window.addEventListener("click", function (e) {
+    const qrModal = document.getElementById("qrModal");
+    if (e.target === qrModal) {
+        window.closeQrModal();
+    }
+});
