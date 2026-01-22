@@ -264,3 +264,72 @@ body.modal-open {
 #categoryFilter:hover {
     border-color: #bb86fc;
 }
+/* KHỐI BÀI VIẾT LIÊN QUAN */
+.related-section {
+    margin-top: 30px;
+    padding-top: 10px;
+}
+
+.related-title {
+    font-size: 1.4rem;
+    color: #bb86fc;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.related-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.related-card {
+    background: #252545;
+    border: 1px solid #2a2a4e;
+    border-left: 3px solid #00ff9d; /* Màu xanh neon tạo điểm nhấn khác biệt với card chính */
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.related-card:hover {
+    background: #2a2a4e;
+    transform: translateX(5px);
+    border-color: #bb86fc;
+}
+
+.related-card h4 {
+    margin: 5px 0 0 0;
+    font-size: 1.05rem;
+    color: #e0d6ff;
+}
+
+.related-card small {
+    color: #8c78a6;
+    font-size: 0.85rem;
+}
+
+.related-card i {
+    color: #bb86fc;
+    font-size: 0.9rem;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.related-card:hover i {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+    .related-card {
+        padding: 12px 15px;
+    }
+}

@@ -1,6 +1,6 @@
 (function() {
     // Đường dẫn đến thư mục CSS và JS của widget
-    const cssPath = 'css/news-widget/style.css'; 
+    const cssPath = 'css/widget.css'; 
     const jsPath = 'js/news-widget/';
 
     // 1. Nạp đúng file CSS

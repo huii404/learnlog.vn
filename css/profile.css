@@ -1,0 +1,354 @@
+/* 1. Layout Container */
+.link-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.link-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 2. HIỆU ỨNG ICON DI CHUYỂN (Thay thế Scrolling Text) */
+.moving-zone {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 30px;
+    overflow: hidden; /* Ẩn icon khi đi ra khỏi biên */
+}
+
+.path-line {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    height: 1px;
+    background: rgba(187, 134, 252, 0.3); /* Đường kẻ mờ làm đường đi */
+}
+
+.moving-icon {
+    position: absolute;
+    bottom: 8px;
+    font-size: 1.5rem;
+    color: #bb86fc;
+    /* Hiệu ứng di chuyển từ trái sang phải */
+    animation: moveAcross 10s linear infinite; 
+}
+
+@keyframes moveAcross {
+    0% {
+        left: -50px;
+        transform: scaleX(1); /* Hướng mặt sang phải */
+    }
+    49% {
+        transform: scaleX(1);
+    }
+    50% {
+        left: calc(100% + 50px);
+        transform: scaleX(-1); /* Quay mặt lại khi đi hết biên */
+    }
+    100% {
+        left: -50px;
+        transform: scaleX(-1);
+    }
+}
+
+/* 3. Social Card - Giữ phong cách hiện đại của bạn */
+.social-card {
+    display: block;
+    text-decoration: none;
+    background: rgba(30, 30, 56, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.card-content i {
+    font-size: 1.4rem;
+    color: #bb86fc;
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng Hover */
+.social-card:hover {
+    background: rgba(187, 134, 252, 0.15);
+    border-color: #bb86fc;
+    transform: translateY(-3px); /* Nhấc nhẹ thẻ lên */
+}
+
+.social-card:hover i {
+    transform: scale(1.2) rotate(-10deg);
+    color: #00ff9d;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .link-container { padding: 0 15px; }
+}
+/* --- PHẦN HASHTAG TRÊN CÙNG --- */
+.header-tags {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    color: #bb86fc;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* --- VÙNG DI CHUYỂN --- */
+.moving-zone {
+    position: relative;
+    width: 100%;
+    height: 60px; /* Tăng độ cao để các icon không đè nhau */
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.path-line {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.5), transparent);
+}
+
+.moving-icon {
+    position: absolute;
+    bottom: 12px;
+    color: #bb86fc;
+    filter: drop-shadow(0 0 5px rgba(187, 134, 252, 0.5));
+}
+
+/* Tốc độ và kích thước riêng cho từng loại */
+.car {
+    font-size: 1.6rem;
+    animation: moveAcross 6s linear infinite; /* Xe chạy nhanh (6 giây) */
+    z-index: 1;
+}
+
+.hiker {
+    font-size: 1.4rem;
+    animation: moveAcross 12s linear infinite, bobbing 0.5s ease-in-out infinite; /* Người đi chậm (12 giây) + nhún nhảy */
+}
+
+.dog {
+    font-size: 1rem;
+    color: #00ff9d; /* Cho con vật màu khác cho nổi bật */
+    animation: moveAcross 9s linear infinite; /* Chó chạy vừa (9 giây) */
+    bottom: 12px;
+}
+
+/* Hiệu ứng di chuyển chung */
+@keyframes moveAcross {
+    0% {
+        left: -100px;
+        transform: scaleX(1);
+    }
+    49% {
+        transform: scaleX(1);
+    }
+    50% {
+        left: calc(100% + 100px);
+        transform: scaleX(-1); /* Quay đầu */
+    }
+    100% {
+        left: -100px;
+        transform: scaleX(-1);
+    }
+}
+
+/* Hiệu ứng nhún nhảy cho người và vật (tạo cảm giác đang bước đi) */
+@keyframes bobbing {
+    0%, 100% { bottom: 12px; }
+    50% { bottom: 18px; }
+}
+
+/* --- GIỮ NGUYÊN CSS SOCIAL CARD CỦA BẠN --- */
+.social-card {
+    display: block;
+    text-decoration: none;
+    background: rgba(30, 30, 56, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px 25px;
+    transition: all 0.3s ease;
+}
+
+.social-card:hover {
+    background: rgba(187, 134, 252, 0.15);
+    border-color: #bb86fc;
+    transform: scale(1.02);
+}
+/* 1. TỐI ƯU HÓA BIẾN HỆ THỐNG */
+:root {
+    --primary-purple: #bb86fc;
+    --dark-bg: #0f0f1e;
+    --card-bg: #1e1e38;
+    --neon-green: #00ff9d;
+    --text-main: #e0d6ff;
+    --text-dim: #8c78a6;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. NỀN HỆ THỐNG GỌN NHẸ */
+body {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 3. KHU VỰC DI CHUYỂN & CẢNH QUAN */
+.moving-zone {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.path-line {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.3), transparent);
+}
+
+/* Icon tĩnh (Cây, Nhà) */
+.static-decor {
+    position: absolute;
+    bottom: 12px;
+    color: rgba(187, 134, 252, 0.2); /* Để màu mờ hơn nhân vật chính */
+    z-index: 0;
+}
+
+.tree-1 { left: 15%; font-size: 1.2rem; }
+.house-1 { left: 50%; font-size: 1.5rem; color: rgba(187, 134, 252, 0.4); }
+.tree-2 { left: 80%; font-size: 1.4rem; }
+
+/* Icon di chuyển (Gộp các thuộc tính chung) */
+.moving-icon {
+    position: absolute;
+    bottom: 12px;
+    color: var(--primary-purple);
+    filter: drop-shadow(0 0 5px rgba(187, 134, 252, 0.4));
+    z-index: 2;
+}
+
+.car { animation: moveAcross 7s linear infinite; font-size: 1.6rem; }
+.hiker { animation: moveAcross 15s linear infinite, bobbing 0.6s ease-in-out infinite; font-size: 1.4rem; }
+.dog { animation: moveAcross 11s linear infinite; font-size: 1rem; color: var(--neon-green); }
+
+/* 4. SOCIAL CARD (Tối ưu gọn hơn) */
+.social-card {
+    display: block;
+    text-decoration: none;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 18px 25px;
+    transition: var(--transition);
+    margin-bottom: 12px;
+}
+
+.social-card:hover {
+    background: rgba(187, 134, 252, 0.1);
+    border-color: var(--primary-purple);
+    transform: translateY(-3px) scale(1.01);
+}
+
+/* 5. MODAL & UI (Loại bỏ các padding/margin thừa) */
+.modal-content-box {
+    background: var(--card-bg);
+    border: 1px solid var(--primary-purple);
+    border-radius: 20px;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* 6. ANIMATIONS */
+@keyframes moveAcross {
+    0% { left: -50px; transform: scaleX(1); }
+    49% { transform: scaleX(1); }
+    50% { left: calc(100% + 50px); transform: scaleX(-1); }
+    100% { left: -50px; transform: scaleX(-1); }
+}
+
+@keyframes bobbing {
+    0%, 100% { bottom: 12px; }
+    50% { bottom: 18px; }
+}
+
+/* 7. RESPONSIVE GỌN NHẸ */
+@media (max-width: 600px) {
+    .link-container { padding: 0 15px; }
+    .section-title { font-size: 0.75rem; }
+}
+/* Style cho SVG Locket */
+.locket-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-purple); /* Mặc định theo màu theme */
+    transition: var(--transition);
+}
+
+/* Hiệu ứng hover riêng cho Locket */
+.social-card.locket:hover {
+    background: rgba(255, 193, 7, 0.15); /* Màu vàng mờ */
+    border-color: #ffc107;
+}
+
+.social-card.locket:hover .locket-icon {
+    color: #ffc107; /* Màu vàng Gold rực rỡ */
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 8px #ffc107);
+}
+
+/* Style cho SVG Gmail */
+.gmail-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--primary-purple); /* Mặc định theo màu tím của bạn */
+    transition: var(--transition);
+}
+
+/* Hiệu ứng hover riêng cho Gmail */
+.social-card.gmail:hover {
+    background: rgba(234, 67, 53, 0.15); /* Đỏ mờ */
+    border-color: #ea4335; /* Màu đỏ Google */
+}
+
+.social-card.gmail:hover .gmail-icon {
+    color: #ea4335;
+    transform: scale(1.2) rotate(-5deg);
+    filter: drop-shadow(0 0 8px rgba(234, 67, 53, 0.5));
+}
