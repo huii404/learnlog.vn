@@ -103,7 +103,7 @@ body.modal-open {
 
 .btn-action-copy {
     background: none; border: none;
-    color: #00ff9d; font-size: 1.2rem;
+    color: #00ff9d; font-size: 1.6rem;
     cursor: pointer;
 }
 
@@ -119,7 +119,7 @@ body.modal-open {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background: #00ff9d; /* Màu xanh Neon nổi bật trên nền tím */
+    background: #00ff9d;
     color: #0f0f1e;
     padding: 12px 25px;
     border-radius: 8px;
@@ -204,7 +204,6 @@ body.modal-open {
 @media (max-width: 600px) {
     .article-controls { flex-direction: column; align-items: stretch; }
 }
-/* articles.css */
 
 .menu-toggle-btn {
     position: fixed;
@@ -238,7 +237,6 @@ body.modal-open {
     transform: scale(0.9);
 }
 
-/* Thêm hiệu ứng nhịp thở nhẹ để thu hút chú ý (tùy chọn) */
 @keyframes pulse-purple {
     0% { box-shadow: 0 0 0 0 rgba(187, 134, 252, 0.4); }
     70% { box-shadow: 0 0 0 10px rgba(187, 134, 252, 0); }

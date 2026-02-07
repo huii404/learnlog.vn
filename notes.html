@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghi chú cá nhân</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/articles.css">
+    <link rel="stylesheet" href="css/notes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="blog-dark-theme">
+    <button class="menu-toggle-btn" id="menuToggleBtn" title="Mở Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="menu-close-btn" id="menuCloseBtn" title="Đóng">&times;</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html" class="sidebar-link active"><i class="fa-solid fa-house"></i></i>Home</a></li>
+            <li><a href="articles.html" class="sidebar-link"><i class="fas fa-newspaper"></i> Bài viết</a></li>
+            <li><a href="notes.html" class="sidebar-link active"><i class="fas fa-sticky-note"></i> Ghi chú</a></li>
+            <li><a href="profile.html" class="sidebar-link"><i class="fas fa-user-astronaut"></i> Profile</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        </header>
+
+        <div class="article-controls note-header-controls">
+            <div class="settings-container">
+                <button class="btn-tool settings-main-btn" id="settingsToggle" title="Cài đặt dữ liệu">
+                    <i class="fas fa-cog"></i> Tùy chọn
+                </button>
+
+                <div class="settings-dropdown" id="settingsDropdown">
+                    <button onclick="handleExport()" class="dropdown-item">
+                        <i class="fas fa-file-export"></i> Backup (Xuất JSON)
+                    </button>
+
+                    <label for="importFile" class="dropdown-item">
+                        <i class="fas fa-file-import"></i> Sync (Nhập JSON)
+                    </label>
+                    <input type="file" id="importFile" hidden accept=".json" onchange="importNotes(event)">
+
+                    <div class="dropdown-divider"></div>
+
+                    <button onclick="handleClear()" class="dropdown-item danger">
+                        <i class="fas fa-trash-alt"></i> Clear (Xóa tất cả)
+                    </button>
+                </div>
+            </div>
+
+            <div class="search-group">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="noteSearch" placeholder="Tìm kiếm nội dung ghi chú...">
+                </div>
+                <div class="filter-menu">
+                    <input type="date" id="dateFilter" class="date-picker-custom" title="Lọc theo ngày">
+                    <button id="addNoteBtn" class="btn-add-main" title="Tạo ghi chú mới">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="noteGrid" class="article-grid">
+            <div class="loading-text">Đang tải ghi chú từ bộ nhớ...</div>
+        </div>
+    </main>
+
+    <div id="noteModal" class="full-modal">
+        <div class="modal-bg-overlay" onclick="closeNoteModal()"></div>
+        <div class="modal-content-box animate-pop-in">
+            <div class="modal-actions-top">
+                <button class="btn-close-modal" onclick="closeNoteModal()">&times;</button>
+            </div>
+
+            <div class="note-editor">
+                <h2 id="modalTitle">Ghi chú mới</h2>
+
+                <div class="input-group">
+                    <label><i class="far fa-calendar-check"></i> Ngày thực hiện:</label>
+                    <input type="date" id="noteDateInput">
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="noteTitleInput" placeholder="Tiêu đề công việc/ý tưởng...">
+                </div>
+
+                <div class="input-group">
+                    <textarea id="noteContentInput" rows="5" placeholder="Nội dung chi tiết..."></textarea>
+                </div>
+
+                <div class="progress-setter">
+                    <div class="prog-info">
+                        <span>Tiến độ hoàn thành:</span>
+                        <strong id="progVal">0</strong>%
+                    </div>
+                    <input type="range" id="noteProgressInput" min="0" max="100" value="0"
+                        oninput="document.getElementById('progVal').innerText = this.value">
+                </div>
+
+                <button id="saveNoteBtn" class="cta-save">
+                    <i class="fas fa-save"></i> Lưu Ghi Chú
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/news-widget/loader.js"></script>
+</body>
+
+</html>

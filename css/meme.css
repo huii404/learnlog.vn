@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%) !important;
+    color: #e0d6ff;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: 'Bungee', cursive;
+    /* Font chữ kiểu mập mạp, vui nhộn */
+}
+
+/* Navbar lầy lội */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%;
+    background: #ff5757;
+    border-bottom: 5px solid #000;
+}
+
+.logo span {
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin: 0 15px;
+    text-transform: uppercase;
+}
+
+.btn-troll {
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-troll:hover {
+    background: #fff;
+    color: #000;
+}
+
+.hero h1 {
+    color: #bb86fc;
+    text-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+}
+/* Điều chỉnh Hero để không đè lên nội dung */
+.hero {
+    min-height: 80vh; /* Chuyển từ height sang min-height để linh hoạt hơn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 100px 20px 50px; /* Thêm padding top để tránh dính menu */
+    position: relative;
+    z-index: 1;
+}
+
+/* Sửa lại Grid để hiển thị đúng dưới Hero */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.meme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 5%;
+}
+
+/* Tối ưu màu sắc để đỡ đau mắt theo ghi chú của bạn */
+body {
+    background: #0f0f1e !important; /* Màu nền tối sâu, giảm gradient chói */
+    color: #e0d6ff;
+    line-height: 1.6;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Tự động co giãn cỡ chữ */
+    color: #bb86fc;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.2);
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #ff5757;
+    display: block; /* Xuống dòng cho đẹp trên mobile */
+}
+
+/* Chỉnh lại độ sáng nền vàng/cam nếu có để tránh đau mắt */
+.navbar, .sidebar-header {
+    background: #1e1e38; 
+    border-bottom: 1px solid #2a2a4e;
+}
+
+.meme-img.stonks {
+    width: 200px;
+    border: 5px solid #000;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: #bb86fc;
+    /* Tiêu đề màu tím neon */
+}
+
+.hero p {
+    color: #8c78a6;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: #bb86fc;
+    text-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+}
+
+.hero h1 span {
+    color: #ff5757;
+}
+
+/* Hiệu ứng rung lắc cho Card */
+.meme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 50px 8%;
+}
+
+.card {
+    background: #1e1e38;
+    border: 1px solid #2a2a4e;
+    border-left: 4px solid #bb86fc;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    color: #e0d6ff;
+    
+    /* Bo góc tròn cho khối meme */
+    border-radius: 20px; 
+    overflow: hidden; /* Đảm bảo ảnh bên trong không bị tràn ra ngoài góc bo */
+    transition: all 0.3s ease;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    /* Bo góc nhẹ cho ảnh phía trên để khớp với card */
+    border-radius: 20px 20px 0 0; 
+    margin-bottom: 15px;
+}
+
+.card:hover {
+    transform: rotate(-3deg);
+    box-shadow: 15px 15px 0px #ff5757;
+}
+
+/* Hiệu ứng Animation */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+/* Hiệu ứng rung khi hover */
+.shake:hover {
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.card img {
+    border-bottom: 2px solid #2a2a4e;
+}
+
+.card h3 {
+    color: #bb86fc;
+    font-family: 'Segoe UI', sans-serif;
+    margin-top: 10px;
+}
+
+.btn-main {
+    background: #bb86fc;
+    color: #1e1e38;
+    border: none;
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.4);
+}
+
+/* Chỉnh lại nút menu để không bị đè */
+.menu-toggle-btn {
+    top: 20px;
+    left: 20px;
+}
+
+.btn-main {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 4px solid #000;
+    background: #8c52ff;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 5px 5px 0px #000;
+    margin-top: 20px;
+}
+
+.btn-main:active {
+    box-shadow: 0px 0px 0px #000;
+    transform: translate(5px, 5px);
+}
+@keyframes earthquake {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-10px, 10px); }
+    20% { transform: translate(10px, -10px); }
+    30% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+
+.earthquake {
+    animation: earthquake 0.1s infinite;
+    overflow: hidden; /* Tránh hiện thanh cuộn khi rung */
+}

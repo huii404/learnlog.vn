@@ -5,7 +5,7 @@ const articlesData = [
     date: "11/01/2026",
     category: "Trick",
     content: `<p>B1: tải shadowrocket tại <a href="https://idapple.csadata4g.me/">Nhấn link</a></p>
-          B2: tải locket hạ cấp(bản mod) tại <a href="https://dvsteam.vn/locket-free">Nhấn link</a>
+          B2: tải locket hạ cấp(bản mod) tại <a href="https://dvsteam.vn/locket-free">Nhấn link</a><br>
           B3: cài config cho shadow(trên yt,tiktok bày)</p>
           Link config(1):<a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule">link</a> -- Link config(2): <a href="https://raw.githubusercontent.com/hvbstar/coderhvb/main/Locket_Gold_HVB.sgmodule">link</a></p>
           B4: cài hồ sơ trong cài đặt IP
@@ -41,21 +41,6 @@ const articlesData = [
   + Muốn fake location thật sự → cần can thiệp GPS/hệ thống</p>`,
   },
   {
-    id: 4,
-    title: "Lợi ích của Shadowrocket",
-    date: "14/01/2026",
-    category: "Tech",
-    content: `
-  <u>Shadowrocket mang lại nhiều lợi ích về bảo mật, tùy chỉnh kết nối và vượt hạn chế internet.</u><br>
-  <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_3_13_638459520438357897_shadowrocket_.jpg" alt="" height="100px"weight="100px"><br>
-  <b>VÌ:</b>
-  + cho phép cấu hình proxy/VPN để mã hóa & bảo vệ dữ liệu online từ các mạng công cộng hoặc riêng tư</p>
-  + giúp ẩn IP và *gián tiếp* vượt một số hạn chế địa lý khi truy cập nội dung (geo-restriction)</p>
-  + hỗ trợ nhiều giao thức proxy như HTTP, SOCKS5, Shadowsocks, Vmess… giúp linh hoạt cho nhiều mục đích sử dụng</p>
-  + thiết lập quy tắc tùy chỉnh (rule based) để quyết định traffic nào đi qua proxy và traffic nào đi trực tiếp :contentReference[oaicite:0]{index=0}</p>
-  + giúp chặn quảng cáo, xem logs lưu lượng và đo tốc độ kết nối tùy theo server và rule thiết lập</p>`,
-  },
-  {
     id: 5,
     title: "Mẹo giảm dung lượng lưu trữ(ổ cứng)",
     date: "14/01/2026",
@@ -63,7 +48,7 @@ const articlesData = [
     content: `
   <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_1_29_638421655993600143_750.jpg" alt="" height="100px"weight="100px"><br>
   <b>VÌ:</b>
-  + Dùng app/web nén ảnh/video ví dụ như:<a href="https://www.youcompress.com/videos/"target="_blank">youcompress</a><br>
+  + Dùng app/web nén ảnh/video ví dụ như:<a href="https://www.youcompress.com/videos/"target="_blank"> youcompress</a><br>
   + Xóa file rác ở thư mục temp trên cmd:<br>
   + tổ hợp phím: win+r --> nhập %temp%-->enter-->xóa hết<br>
   + Tận dụng tài khoản: (ondrive,gg drive) để lưu<br>
@@ -78,7 +63,7 @@ const articlesData = [
     date: "14/01/2026",
     category: "Trick",
     content: `
-  <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_1_29_638421655993600143_750.jpg" alt="" height="100px"weight="100px"><br>
+  <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_1_29_638421655993600143_750.jpg" alt="" height="100px"weight="100px">
   + B1: edit chán đi<br>
   + B2: xuất->bắt dùng pro->thoát app->bật vpn->quay lại và xuất<br>
   + tổ hợp phím: win+r --> nhập %temp%-->enter-->xóa hết<br>
@@ -94,7 +79,7 @@ const articlesData = [
     id: 7,
     title: "Tổng hợp các app VPN phổ biến hiện nay",
     date: "14/01/2026",
-    category: "Review",
+    category: "Tài nguyên",
     content: `
   <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_1_29_638421655993600143_750.jpg" alt="VPN apps" height="100px" width="200px"><br><br>
 
@@ -104,7 +89,7 @@ const articlesData = [
     Thường được dùng để bảo mật, truy cập nội dung bị giới hạn vùng.
   </p>
   <hr>
-  <p><b>1. 1.1.1.1 (Cloudflare WARP)</b>
+  <p><b>1. 1.1.1.1 (Cloudflare WARP)</b><br>
   <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/1-1-1-1-for-pc-1.jpg"alt=""heght="200px"width="200px"><br>
     + Miễn phí, tốc độ nhanh<br>
     + Không cần đăng ký tài khoản<br>
@@ -112,7 +97,7 @@ const articlesData = [
   </p>
   <p><u>Nhược điểm:</u> Không chọn được quốc gia cụ thể</p>
   <hr>
-  <p><b>2. Shadowrocket (iOS)</b>
+  <p><b>2. Shadowrocket (iOS)</b><br>
   <img src="https://cdn2.fptshop.com.vn/unsafe/1080x0/filters:format(webp):quality(75)/2024_3_13_638459520438357897_shadowrocket_.jpg"alt=""heght="200px"width="200px"><br>
     + Hỗ trợ cấu hình proxy / VPN nâng cao<br>
     + Dùng file config (V2Ray, Trojan, SSR...)<br>
@@ -120,7 +105,7 @@ const articlesData = [
   </p>
   <p><u>Nhược điểm:</u> Trả phí, cần config riêng</p>
   <hr>
-  <p><b>3. Turbo VPN</b>
+  <p><b>3. Turbo VPN</b><br>
   <img src="https://cdn2.fptshop.com.vn/unsafe/1240x0/filters:format(webp):quality(75)/small/turbo_vpn_1_1d6bb6c3c9.jpg"alt=""heght="200px"width="200px"><br>
     + Giao diện đơn giản, dễ dùng<br>
     + Có bản miễn phí<br>
@@ -128,7 +113,7 @@ const articlesData = [
   </p>
   <p><u>Nhược điểm:</u> Có quảng cáo, giới hạn server</p>
   <hr>
-  <p><b>4. Proton VPN</b>
+  <p><b>4. Proton VPN</b><br>
     + Độ bảo mật cao, uy tín<br>
     + Có bản free không giới hạn dung lượng<br>
     + Hỗ trợ nhiều nền tảng
@@ -165,7 +150,7 @@ const articlesData = [
          <p>ID tải shadow free: <a href="https://idapple.csadata4g.me/">link</a><br>
           App locket mod: <a href="https://dvsteam.vn/locket-free"target="_blank">link</a><br>
           Config locket 1: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a></p>
-          Config locket 1 :<a href="https://raw.githubusercontent.com/hvbstar/coderhvb/main/Locket_Gold_HVB.sgmodule"target="_blank">link</a></p>
+          Config locket 2: <a href="https://raw.githubusercontent.com/hvbstar/coderhvb/main/Locket_Gold_HVB.sgmodule"target="_blank">link</a></p>
           Config youtube: <a href="https://raw.githubusercontent.com/quocchienn/YouTubePIP/refs/heads/YouTube%2B%2B/YouTubefix3.conf"target="_blank">link</a></p>
           Module youtube: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a></p>
           Config spotify: <a href="https://raw.githubusercontent.com/quocchienn/1in1/refs/heads/main/Spotify.conf"target="_blank">link</a></p>
@@ -196,15 +181,13 @@ const articlesData = [
     id:10,
     title:"Tài liệu lập trình",
     date:"11/01/20206",
-    category:"Lập Trình",
+    category:"Tech",
     content:
     `
     <div>
-
     <div align="center">
     <img src="https://mikotech.vn/wp-content/uploads/2022/10/lap-trinh.jpg.webp"alt="lap trinh"width="200"height="200">
     </div>
-
     <hr>
     <h3>C/C++</h3>
     <p>
@@ -212,9 +195,7 @@ const articlesData = [
         Kho thuật toán: <a href="https://github.com/MAZHARMIK/Interview_DS_Algo">Link</a><br>
         Project C/C++: <a href="https://github.com/codetoanbug/The-Ultimate-C-Programming-Course">Link</a><br>
         Giao diện C++ MPC: <a href="https://www.youtube.com/playlist?list=PLfszubEEhakf7mGTDjsImyp-YGU69_S5k">Link</a><br>
-    </p>
-
-    <hr>
+    </p><hr>
     <h3>JAVA</h3>
     <p>
         9 tuần học Java: <a href="https://github.com/hit-haui/Java-HIT-2019">Link</a><br>
@@ -225,14 +206,12 @@ const articlesData = [
     <hr>
     <h3>JAVASCRIPT</h3>
     <p>Câu hỏi phỏng vấn JS: <a href="https://github.com/lydiahallie/javascript-questions/blob/master/vi-VI/README-vi.md">Link</a></p>
-
     <hr>
     <h3>PYTHON</h3>
     <p>
       Tài liệu Python: <a href="https://github.com/codetoanbug/pytutor">Link</a><br>
       Python PDF: <a href="https://drive.google.com/drive/u/0/folders/1XxvRMSDA-KgfRL8oC-vLkbUpM8Tdcq3o">Link</a>
     </p>
-
     <hr>
     <h3>Tổng hợp</h3>
     <ol>
@@ -266,5 +245,17 @@ const articlesData = [
     kho api: <a href="https://ios.codevn.net/">link</a><br>
     ksign,esign...: <a href="https://khoindvn.io.vn/">link</a></h>
     `
+  },
+    {
+    id: 12,
+    title: "CÔNG CỤ HỮU ÍCH",
+    date: "30/01/2025",
+    category: "Tech",
+    content: 
+    `
+    <p>Tool c++(cmd) hỗ trợ tương tác máy tính:đang cập nhật <a href=""></a>
+
+
+    `,
   },
 ];

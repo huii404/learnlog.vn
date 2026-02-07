@@ -1,0 +1,327 @@
+/* ============================================================
+   1. QUẢN LÝ CÔNG CỤ & DATA ACTIONS
+   ============================================================ */
+.note-header-controls {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 15px !important;
+}
+
+.data-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-tool {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    background: #1e1e38;
+    border: 1px solid #2a2a4e;
+    color: #8c78a6;
+    transition: 0.3s;
+}
+
+.btn-tool:hover { transform: translateY(-2px); }
+.btn-tool.backup:hover { color: #00ff9d; border-color: #00ff9d; }
+.btn-tool.sync:hover { color: #bb86fc; border-color: #bb86fc; }
+.btn-tool.clear:hover { color: #ff5252; border-color: #ff5252; }
+
+/* Search & Filter */
+.search-group {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.date-picker-custom {
+    background: #1e1e38;
+    border: 1px solid #2a2a4e;
+    color: #bb86fc;
+    padding: 8px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-add-main {
+    background: #bb86fc;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: #1a1a2e;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.btn-add-main:hover { background: #00ff9d; box-shadow: 0 0 15px rgba(0, 255, 157, 0.4); }
+
+/* ============================================================
+   2. CARD GHI CHÚ & NỘI DUNG (Dòng 1, 2, 3, 4)
+   ============================================================ */
+.note-card {
+    background: #1e1e38;
+    border: 1px solid #2a2a4e;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #00ff9d;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dòng 1: Ngày */
+.note-date {
+    font-size: 0.85rem;
+    color: #8c78a6;
+}
+
+/* Dòng 2: Tiêu đề (Căn giữa, Đậm, Nghiêng) */
+.note-title-text {
+    text-align: center;
+    font-weight: 700;
+    font-style: italic;
+    color: #00ff9d;
+    margin: 15px 0 10px 0;
+    font-size: 1.2rem;
+}
+
+/* Dòng 3: Nội dung (Chữ thường) */
+.note-body-text {
+    font-weight: 400;
+    font-style: normal;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Dòng 4: Thanh tiến độ có % bên trong */
+.progress-container {
+    height: 18px;
+    background: #0f0f1e;
+    border-radius: 9px;
+    margin-bottom: 10px;
+    border: 1px solid #2a2a4e;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #bb86fc, #00ff9d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.4s ease;
+    min-width: 35px;
+}
+
+.progress-text-inside {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #1a1a2e;
+}
+
+/* Nút Sửa/Xóa */
+.note-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 5px;
+    border-top: 1px solid #2a2a4e;
+    padding-top: 10px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.btn-icon.edit { color: #bb86fc; }
+.btn-icon.edit:hover { color: #00ff9d; transform: scale(1.2); }
+
+.btn-icon.delete { color: #ff5252; }
+.btn-icon.delete:hover { color: #ff1744; transform: scale(1.2); filter: drop-shadow(0 0 5px rgba(255,82,82,0.5)); }
+
+/* ============================================================
+   3. MODAL EDITOR
+   ============================================================ */
+.note-editor input, .note-editor textarea {
+    width: 100%;
+    background: #15152a;
+    border: 1px solid #2a2a4e;
+    color: white;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Sửa màu Icon lịch trong Modal */
+.input-group label i {
+    color: #00ff9d;
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+#noteDateInput {
+    background: #15152a;
+    border: 1px solid #2a2a4e;
+    color: #00ff9d;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.progress-setter {
+    margin: 15px 0;
+    color: #8c78a6;
+}
+
+.progress-setter input[type="range"] {
+    width: 100%;
+    accent-color: #bb86fc;
+    margin-top: 10px;
+}
+
+.cta-save {
+    width: 100%;
+    padding: 12px;
+    background: #bb86fc;
+    border: none;
+    color: #1a1a2e;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ============================================================
+   4. RESPONSIVE (MOBILE)
+   ============================================================ */
+@media (max-width: 768px) {
+    .note-header-controls {
+        padding-top: 70px !important;
+        align-items: center !important;
+        text-align: center;
+    }
+
+    .data-actions {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .search-group {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .search-bar {
+        width: 100% !important;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+/* Container cho menu cài đặt */
+.settings-container {
+    position: relative;
+    display: inline-block;
+}
+
+.settings-main-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e1e38;
+    color: #bb86fc !important;
+    border: 1px solid #bb86fc !important;
+    padding: 8px 15px;
+    font-weight: 600;
+}
+
+/* Dropdown Menu */
+.settings-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: #1e1e38;
+    border: 1px solid #2a2a4e;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none; /* Ẩn mặc định */
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInDown 0.3s ease;
+}
+
+.settings-dropdown.active {
+    display: flex;
+}
+
+/* Item trong menu */
+.dropdown-item {
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.dropdown-item i {
+    width: 20px;
+    color: #bb86fc;
+}
+
+.dropdown-item:hover {
+    background: #2a2a4e;
+    color: #00ff9d;
+}
+
+.dropdown-item.danger {
+    color: #ff5252;
+}
+
+.dropdown-item.danger:hover {
+    background: rgba(255, 82, 82, 0.1);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #2a2a4e;
+    margin: 5px 0;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
