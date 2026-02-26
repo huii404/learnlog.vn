@@ -1,74 +1,151 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Động Meme</title>
-
+    <title>Home - Realistic Nature</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Bungee&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/meme.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
-<body class="blog-dark-theme">
-
-    <button class="menu-toggle-btn" id="menuToggleBtn" title="Mở Menu">
-        <i class="fas fa-bars"></i>
-    </button>
-
+<body class="night-mode"> 
+    <button class="menu-toggle-btn" id="menuToggleBtn"><i class="fas fa-bars"></i></button>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
     <nav class="sidebar-menu" id="sidebarMenu">
         <div class="sidebar-header">
-            <button class="menu-close-btn" id="menuCloseBtn" title="Đóng">&times;</button>
+            <h3>Menu</h3>
+            <button class="menu-close-btn" id="menuCloseBtn">&times;</button>
         </div>
         <ul class="sidebar-links">
-            <li><a href="index.html" class="sidebar-link active"><i class="fa-solid fa-house"></i></i>Home</a></li>
+            <li><a href="index.html" class="sidebar-link active"><i class="fa-solid fa-house"></i> Home</a></li>
             <li><a href="articles.html" class="sidebar-link"><i class="fas fa-newspaper"></i> Bài viết</a></li>
-            <li><a href="notes.html" class="sidebar-link active"><i class="fas fa-sticky-note"></i> Ghi chú</a></li>
             <li><a href="profile.html" class="sidebar-link"><i class="fas fa-user-astronaut"></i> Profile</a></li>
         </ul>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <img src="https://i.imgflip.com/30zz5g.jpg" alt="Stonks" class="meme-img stonks">
-            <h1 class="bounce">CODE XONG NGHỈ <br><span>THƯỞNG NGAY MEME</span></h1>
-            <p>Học lập trình không khó, chỉ khó ở chỗ... tìm xem bug nằm ở đâu!</p>
-            <div class="hero-btns">
-                <button class="btn-main" id="trollBtn">Nút Vô Dụng</button>
-            </div>
-        </div>
-    </header>
+    <!-- Đồng hồ thời gian -->
+    <div class="time-indicator" id="timeIndicator">
+        <span id="timeIcon">🌙</span>
+        <span id="timeLabel">Ban Đêm</span>
+    </div>
 
-    <main class="container">
-        <section class="meme-grid">
-            <div class="card shake">
-                <img src="https://gocnhobecon.com/wp-content/uploads/2025/09/ech-pepe-chua-he.webp" alt="Doge">
-                <h3>Thiếu thiếu...</h3>
-                <p>Tiềnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
-            </div>
+    <main class="nature-scene">
+        <!-- Lớp chớp sấm -->
+        <div class="lightning-flash" id="lightningFlash"></div>
 
-            <div class="card shake">
-                <img src="https://i.imgflip.com/4t0m5.jpg" alt="Crying">
-                <h3>Fix Bug</h3>
-                <p>Fix 1 lỗi, lòi ra 10 lỗi mới. Cảm giác thật yomost!</p>
+        <div class="sky-container">
+            <div class="stars-bg"></div>
+            <div id="shooting-stars-container"></div>
+            
+            <!-- Lớp mưa -->
+            <div class="rain-container" id="rainContainer"></div>
+
+            <!-- Chim bay (ban ngày) -->
+            <div class="birds-container" id="birdsContainer"></div>
+
+            <div class="clouds-container">
+                <div class="cloud c1"></div>
+                <div class="cloud c2"></div>
+                <div class="cloud c3"></div>
+                <!-- Mây mưa tối màu -->
+                <div class="cloud rain-cloud rc1"></div>
+                <div class="cloud rain-cloud rc2"></div>
             </div>
             
-            <div class="card shake">
-                <img src="https://i.imgflip.com/23ls.jpg" alt="Everything is fine">
-                <h3>Production Down</h3>
-                <p>Server đang cháy nhưng tôi vẫn đang mải chọn theme VS Code.</p>
+            <div class="sky-orbit-wrapper">
+                <div class="orbit-center" id="orbitCenter">
+                    <div class="celestial-body sun">
+                        <div class="sun-rays"></div>
+                    </div>
+                    <div class="celestial-body moon">
+                        <div class="crater c-1"></div>
+                        <div class="crater c-2"></div>
+                        <div class="crater c-3"></div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <div class="landscape-container">
+            <svg class="mountain-range back-mountain" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0,192L60,202.7C120,213,240,235,360,224C480,213,600,171,720,165.3C840,160,960,192,1080,197.3C1200,203,1320,181,1380,170.7L1440,160L1440,400L1380,400C1320,400,1200,400,1080,400C960,400,840,400,720,400C600,400,480,400,360,400C240,400,120,400,60,400L0,400Z"></path>
+            </svg>
+            
+            <svg class="mountain-range front-mountain" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                 <path d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,133.3C1120,117,1280,139,1360,149.3L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+            </svg>
+
+            <!-- Cây cối -->
+            <div class="trees-container">
+                <!-- Cây bên trái -->
+                <svg class="tree tree-1" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="tree-trunk" x="25" y="80" width="10" height="40"/>
+                    <polygon class="tree-leaves" points="30,5 5,55 55,55"/>
+                    <polygon class="tree-leaves tree-mid" points="30,25 8,65 52,65"/>
+                    <polygon class="tree-leaves tree-bot" points="30,45 3,85 57,85"/>
+                </svg>
+                <svg class="tree tree-2" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="tree-trunk" x="25" y="80" width="10" height="40"/>
+                    <polygon class="tree-leaves" points="30,5 5,55 55,55"/>
+                    <polygon class="tree-leaves tree-mid" points="30,25 8,65 52,65"/>
+                    <polygon class="tree-leaves tree-bot" points="30,45 3,85 57,85"/>
+                </svg>
+                <!-- Cây bên phải -->
+                <svg class="tree tree-3" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="tree-trunk" x="25" y="80" width="10" height="40"/>
+                    <polygon class="tree-leaves" points="30,5 5,55 55,55"/>
+                    <polygon class="tree-leaves tree-mid" points="30,25 8,65 52,65"/>
+                    <polygon class="tree-leaves tree-bot" points="30,45 3,85 57,85"/>
+                </svg>
+                <svg class="tree tree-4" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="tree-trunk" x="25" y="80" width="10" height="40"/>
+                    <polygon class="tree-leaves" points="30,5 5,55 55,55"/>
+                    <polygon class="tree-leaves tree-mid" points="30,25 8,65 52,65"/>
+                    <polygon class="tree-leaves tree-bot" points="30,45 3,85 57,85"/>
+                </svg>
+                <svg class="tree tree-5" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="tree-trunk" x="25" y="80" width="10" height="40"/>
+                    <polygon class="tree-leaves" points="30,5 5,55 55,55"/>
+                    <polygon class="tree-leaves tree-mid" points="30,25 8,65 52,65"/>
+                    <polygon class="tree-leaves tree-bot" points="30,45 3,85 57,85"/>
+                </svg>
+            </div>
+
+            <div class="house-container">
+                <svg class="realistic-house" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="house-chimney" x="140" y="40" width="20" height="40"/>
+                    <path class="house-roof" d="M100,20 L10,90 L190,90 Z"/>
+                    <rect class="house-body" x="20" y="90" width="160" height="110"/>
+                    <rect class="house-door" x="85" y="140" width="30" height="60"/>
+                    <rect class="house-window window-left" x="40" y="120" width="30" height="30"/>
+                    <rect class="house-window window-right" x="130" y="120" width="30" height="30"/>
+                    <rect class="window-light light-left" x="45" y="125" width="20" height="20"/>
+                    <rect class="window-light light-right" x="135" y="125" width="20" height="20"/>
+                </svg>
+                <div class="smoke-container">
+                    <div class="smoke s1"></div>
+                    <div class="smoke s2"></div>
+                </div>
+            </div>
+
+            <div class="car-wrapper">
+                <svg class="car-svg" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="headlight-beam" points="150,35 300,10 300,60" fill="rgba(255, 255, 100, 0.4)" />
+                    <rect x="20" y="25" width="120" height="20" fill="#e74c3c" rx="5"/>
+                    <rect x="40" y="5" width="70" height="20" fill="#c0392b" rx="5"/>
+                    <circle cx="45" cy="45" r="10" fill="#222"/>
+                    <circle cx="115" cy="45" r="10" fill="#222"/>
+                    <rect class="car-window" x="45" y="10" width="25" height="15" fill="#87CEEB"/>
+                    <rect class="car-window" x="75" y="10" width="25" height="15" fill="#87CEEB"/>
+                    <rect class="headlight" x="135" y="28" width="5" height="8" fill="yellow"/>
+                </svg>
+            </div>
+            
+            <div class="ground"></div>
+        </div>
     </main>
 
-    <script src="js/main.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/main.js"></script>
 </body>
-
 </html>

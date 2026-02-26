@@ -1,0 +1,513 @@
+/* =====================================================
+   INDEX.CSS - REALISTIC NATURE SCENE
+   Nâng cấp: Bình minh/hoàng hôn, cây cối, mưa, chim
+   ===================================================== */
+
+/* --- SIDEBAR & NAV (giữ nguyên) --- */
+.menu-toggle-btn {
+    position: fixed;
+    top: 15px; left: 15px;
+    z-index: 1000;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.3s;
+}
+.menu-toggle-btn:hover { background: rgba(255,255,255,0.3); }
+
+.sidebar-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+.sidebar-overlay.active { display: block; }
+
+.sidebar-menu {
+    position: fixed;
+    top: 0; left: -280px;
+    width: 260px; height: 100vh;
+    background: rgba(10,10,30,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    transition: left 0.3s ease;
+    padding: 20px 0;
+}
+.sidebar-menu.open { left: 0; }
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+}
+.menu-close-btn {
+    background: none; border: none;
+    color: #fff; font-size: 1.8rem; cursor: pointer;
+}
+.sidebar-links { list-style: none; padding: 15px 0; margin: 0; }
+.sidebar-link {
+    display: block;
+    padding: 12px 20px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.sidebar-link:hover, .sidebar-link.active {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    padding-left: 28px;
+}
+
+/* --- ĐỒNG HỒ THỜI GIAN --- */
+.time-indicator {
+    position: fixed;
+    top: 15px; right: 15px;
+    z-index: 100;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 1s ease;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- CẤU HÌNH MÀU SẮC THEO PHASE --- */
+:root {
+    /* ĐÊM */
+    --bg-sky-top: #020210;
+    --bg-sky-bottom: #0a0a2a;
+    --mountain-back: #050510;
+    --mountain-front: #0a0a1e;
+    --ground-color: #080818;
+    --house-roof: #1a1a2e;
+    --house-body: #22223a;
+    --house-door: #111122;
+    --window-light-opacity: 1;
+    --cloud-opacity: 0;
+    --rain-cloud-opacity: 0;
+    --tree-color: #0a1208;
+    --tree-trunk-color: #0d0d0d;
+    --transition-speed: 3s;
+}
+
+/* BÌNH MINH */
+body.dawn-mode {
+    --bg-sky-top: #1a0533;
+    --bg-sky-bottom: #ff6b35;
+    --mountain-back: #1a0e2e;
+    --mountain-front: #2d1b4e;
+    --ground-color: #2a1a0a;
+    --house-roof: #3d2010;
+    --house-body: #4a2e1a;
+    --house-door: #2a1208;
+    --window-light-opacity: 0.7;
+    --cloud-opacity: 0.4;
+    --tree-color: #1a2a0a;
+    --tree-trunk-color: #1a0a00;
+}
+
+/* BAN NGÀY */
+body.day-mode {
+    --bg-sky-top: #4fc3f7;
+    --bg-sky-bottom: #87CEEB;
+    --mountain-back: #2E5A4B;
+    --mountain-front: #3D7A61;
+    --ground-color: #567d46;
+    --house-roof: #8b4513;
+    --house-body: #d2b48c;
+    --house-door: #6b4226;
+    --window-light-opacity: 0;
+    --cloud-opacity: 0.85;
+    --rain-cloud-opacity: 0;
+    --tree-color: #2d6e2d;
+    --tree-trunk-color: #5c3317;
+}
+
+/* HOÀNG HÔN */
+body.dusk-mode {
+    --bg-sky-top: #0d0520;
+    --bg-sky-bottom: #e55d1a;
+    --mountain-back: #12082a;
+    --mountain-front: #1e1040;
+    --ground-color: #1a0e05;
+    --house-roof: #2a1008;
+    --house-body: #3a2010;
+    --house-door: #1a0808;
+    --window-light-opacity: 0.5;
+    --cloud-opacity: 0.5;
+    --tree-color: #0e1a05;
+    --tree-trunk-color: #100800;
+}
+
+/* MƯA (đêm mưa) */
+body.rain-mode {
+    --bg-sky-top: #050510;
+    --bg-sky-bottom: #0f1520;
+    --rain-cloud-opacity: 0.9;
+    --cloud-opacity: 0;
+}
+
+/* --- KHUNG CẢNH CHÍNH --- */
+.nature-scene {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--bg-sky-top), var(--bg-sky-bottom));
+    transition: background var(--transition-speed) ease;
+}
+
+/* Chớp sấm */
+.lightning-flash {
+    position: absolute;
+    inset: 0;
+    background: rgba(200, 220, 255, 0.0);
+    z-index: 50;
+    pointer-events: none;
+    transition: background 0.05s;
+}
+.lightning-flash.active {
+    background: rgba(200, 220, 255, 0.6);
+}
+
+.sky-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 70%;
+    pointer-events: none;
+}
+
+.stars-bg {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.5;
+    transition: opacity var(--transition-speed);
+}
+body.day-mode .stars-bg,
+body.dusk-mode .stars-bg { opacity: 0; }
+body.dawn-mode .stars-bg { opacity: 0.1; }
+
+/* --- QUỸ ĐẠO MẶT TRỜI & MẶT TRĂNG --- */
+.sky-orbit-wrapper {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    width: 80vw;
+    height: 80vw;
+    max-width: 900px;
+    max-height: 900px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.orbit-center {
+    position: relative;
+    width: 100%; height: 100%;
+}
+
+.celestial-body {
+    position: absolute;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sun {
+    top: -40px;
+    background: radial-gradient(circle, #fff7a1 30%, #FFD700 70%);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 180, 0, 0.4);
+}
+
+/* Mặt trời đổi màu theo phase */
+body.dawn-mode .sun {
+    background: radial-gradient(circle, #ffe0a0 30%, #ff8c00 70%);
+    box-shadow: 0 0 60px rgba(255, 140, 0, 0.9), 0 0 120px rgba(255, 80, 0, 0.5);
+}
+body.dusk-mode .sun {
+    background: radial-gradient(circle, #ffb060 30%, #ff4500 70%);
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0.9), 0 0 120px rgba(200, 30, 0, 0.5);
+}
+
+.moon {
+    bottom: -40px;
+    background: radial-gradient(circle at 35% 35%, #f8f8f0 30%, #d4d4c0 100%);
+    box-shadow: 0 0 30px rgba(255,255,255,0.5), 0 0 60px rgba(200,220,255,0.3);
+}
+
+.sun-rays {
+    position: absolute;
+    top: -30px; left: -30px; right: -30px; bottom: -30px;
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 60%);
+    animation: pulseRays 3s infinite alternate;
+}
+@keyframes pulseRays {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1.4); opacity: 1; }
+}
+
+.crater {
+    position: absolute;
+    background: rgba(0,0,0,0.12);
+    border-radius: 50%;
+}
+.c-1 { width: 20px; height: 20px; top: 15px; left: 15px; }
+.c-2 { width: 10px; height: 10px; top: 45px; left: 40px; }
+.c-3 { width: 15px; height: 15px; top: 30px; left: 55px; }
+
+/* --- MÂY TRÔI --- */
+.clouds-container {
+    position: absolute;
+    width: 100%; height: 100%;
+    opacity: var(--cloud-opacity);
+    transition: opacity var(--transition-speed);
+}
+.cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    opacity: 0.85;
+}
+.cloud::after, .cloud::before {
+    content: ''; position: absolute; background: inherit; border-radius: 50%;
+}
+.c1 { width: 120px; height: 40px; top: 20%; left: -150px; animation: floatCloud 28s linear infinite; }
+.c1::after { width: 50px; height: 50px; top: -25px; left: 15px; }
+.c1::before { width: 40px; height: 40px; top: -15px; right: 15px; }
+.c2 { width: 80px; height: 30px; top: 40%; left: -100px; animation: floatCloud 38s linear infinite reverse; opacity: 0.6; }
+.c3 { width: 150px; height: 50px; top: 10%; left: -200px; animation: floatCloud 45s linear infinite 5s; }
+
+/* Mây mưa - tối hơn */
+.rain-cloud {
+    background: #444;
+    opacity: var(--rain-cloud-opacity) !important;
+    transition: opacity var(--transition-speed);
+}
+.rain-cloud::after, .rain-cloud::before { background: #444; }
+.rc1 { width: 200px; height: 60px; top: 15%; left: -250px; animation: floatCloud 20s linear infinite 2s; }
+.rc1::after { width: 80px; height: 70px; top: -35px; left: 20px; }
+.rc1::before { width: 60px; height: 60px; top: -25px; right: 20px; }
+.rc2 { width: 160px; height: 50px; top: 30%; left: -200px; animation: floatCloud 25s linear infinite 8s; }
+.rc2::after { width: 65px; height: 60px; top: -28px; left: 15px; }
+.rc2::before { width: 55px; height: 50px; top: -20px; right: 12px; }
+
+@keyframes floatCloud {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(120vw); }
+}
+
+/* --- SAO BĂNG --- */
+.shooting-star {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    animation: shoot 2s linear forwards;
+    opacity: 0;
+}
+.shooting-star::before {
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+    width: 100px; height: 2px;
+    background: linear-gradient(90deg, #fff, transparent); right: 0;
+}
+@keyframes shoot {
+    0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
+    100% { transform: translate(-300px, 300px) rotate(-45deg); opacity: 0; }
+}
+
+/* --- MƯA --- */
+.rain-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.raindrop {
+    position: absolute;
+    width: 1.5px;
+    background: linear-gradient(to bottom, transparent, rgba(174, 214, 241, 0.8));
+    border-radius: 2px;
+    animation: rainFall linear infinite;
+    top: -60px;
+}
+@keyframes rainFall {
+    0% { transform: translateY(-60px) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(100vh) translateX(-20px); opacity: 0; }
+}
+
+/* --- CHIM BAY --- */
+.birds-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.bird {
+    position: absolute;
+    animation: birdFly linear forwards;
+    opacity: 0;
+}
+.bird svg path {
+    fill: none;
+    stroke: #333;
+    stroke-width: 2;
+}
+body.day-mode .bird svg path { stroke: #222; }
+
+@keyframes birdFly {
+    0% { transform: translateX(-80px); opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { transform: translateX(110vw); opacity: 0; }
+}
+@keyframes wingFlap {
+    0%, 100% { d: path("M0,0 Q5,-8 10,0"); }
+    50% { d: path("M0,0 Q5,8 10,0"); }
+}
+
+/* --- PHONG CẢNH --- */
+.landscape-container {
+    position: absolute;
+    bottom: 0; width: 100%; height: 50%;
+    pointer-events: none;
+}
+.mountain-range { position: absolute; bottom: 0; left: 0; width: 100%; }
+.back-mountain path { fill: var(--mountain-back); transition: fill var(--transition-speed); }
+.back-mountain { height: 400px; z-index: 1; }
+.front-mountain path { fill: var(--mountain-front); transition: fill var(--transition-speed); }
+.front-mountain { height: 250px; z-index: 2; }
+.ground {
+    position: absolute; bottom: 0; width: 100%; height: 80px;
+    background: var(--ground-color); transition: background var(--transition-speed); z-index: 3;
+}
+
+/* --- CÂY CỐI --- */
+.trees-container {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+.tree {
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
+    animation: treeWind 4s ease-in-out infinite;
+}
+.tree-leaves {
+    fill: var(--tree-color);
+    transition: fill var(--transition-speed);
+}
+.tree-mid { fill: var(--tree-color); filter: brightness(0.9); transition: fill var(--transition-speed); }
+.tree-bot { fill: var(--tree-color); filter: brightness(0.8); transition: fill var(--transition-speed); }
+.tree-trunk {
+    fill: var(--tree-trunk-color);
+    transition: fill var(--transition-speed);
+}
+
+/* Vị trí các cây */
+.tree-1 { left: 3%; width: 55px; height: 110px; animation-delay: 0s; }
+.tree-2 { left: 7%; width: 45px; height: 90px; animation-delay: 1.2s; }
+.tree-3 { right: 5%; width: 60px; height: 120px; animation-delay: 0.5s; }
+.tree-4 { right: 10%; width: 50px; height: 100px; animation-delay: 1.8s; }
+.tree-5 { right: 3%; width: 40px; height: 80px; animation-delay: 2.5s; }
+
+@keyframes treeWind {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1.5deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+/* Cây rung mạnh khi mưa */
+body.rain-mode .tree {
+    animation: treeWindStrong 2s ease-in-out infinite;
+}
+@keyframes treeWindStrong {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(4deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+/* --- NHÀ & CÀU XE --- */
+.house-container {
+    position: absolute; bottom: 60px; left: 15%; width: 200px; height: 200px; z-index: 5;
+}
+.realistic-house { overflow: visible; }
+.house-roof { fill: var(--house-roof); transition: fill var(--transition-speed); }
+.house-chimney { fill: var(--house-body); transition: fill var(--transition-speed); }
+.house-body { fill: var(--house-body); transition: fill var(--transition-speed); }
+.house-door { fill: var(--house-door); transition: fill var(--transition-speed); }
+.house-window { fill: #333; transition: fill var(--transition-speed); }
+.window-light {
+    fill: #ffdb33;
+    opacity: var(--window-light-opacity);
+    filter: blur(3px);
+    transition: opacity var(--transition-speed);
+}
+
+/* Hào quang cửa sổ ban đêm */
+body:not(.day-mode) .window-light {
+    filter: blur(3px) drop-shadow(0 0 8px #ffdb33);
+}
+
+.smoke-container {
+    position: absolute; top: 30px; left: 150px;
+    opacity: var(--window-light-opacity);
+    transition: opacity var(--transition-speed);
+}
+.smoke {
+    position: absolute; width: 10px; height: 10px;
+    background: rgba(255,255,255,0.5); border-radius: 50%;
+    filter: blur(5px);
+    animation: smokeWindRise 4s ease-out infinite;
+}
+.s2 { animation-delay: 2s; }
+@keyframes smokeWindRise {
+    0% { transform: translate(0,0) scale(1); opacity: 0.8; }
+    100% { transform: translate(120px, -60px) scale(4); opacity: 0; }
+}
+
+/* Mưa không có khói (khói bị mưa dập) */
+body.rain-mode .smoke { opacity: 0 !important; }
+
+/* --- XE Ô TÔ --- */
+.car-wrapper {
+    position: absolute;
+    bottom: 50px;
+    left: -200px;
+    width: 160px;
+    z-index: 6;
+    animation: driveCar 12s linear infinite;
+}
+.car-window { transition: fill var(--transition-speed); }
+body:not(.day-mode) .car-window { fill: #2a3a4a; }
+
+.headlight-beam {
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+body:not(.day-mode) .headlight-beam { opacity: 1; }
+
+@keyframes driveCar {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(110vw + 200px)); }
+}

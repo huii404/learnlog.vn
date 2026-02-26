@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/articles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="blog-dark-theme">
+
+    <!-- Nút mở menu -->
     <button class="menu-toggle-btn" id="menuToggleBtn" title="Mở Menu">
         <i class="fas fa-bars"></i>
     </button>
@@ -26,9 +27,8 @@
             <button class="menu-close-btn" id="menuCloseBtn" title="Đóng">&times;</button>
         </div>
         <ul class="sidebar-links">
-            <li><a href="index.html" class="sidebar-link active"><i class="fa-solid fa-house"></i></i>Home</a></li>
+            <li><a href="index.html" class="sidebar-link active"><i class="fa-solid fa-house"></i> Home</a></li>
             <li><a href="articles.html" class="sidebar-link"><i class="fas fa-newspaper"></i> Bài viết</a></li>
-            <li><a href="notes.html" class="sidebar-link active"><i class="fas fa-sticky-note"></i> Ghi chú</a></li>
             <li><a href="profile.html" class="sidebar-link"><i class="fas fa-user-astronaut"></i> Profile</a></li>
         </ul>
     </nav>
@@ -51,6 +51,12 @@
                     <option value="newest">Mới nhất</option>
                     <option value="oldest">Cũ nhất</option>
                 </select>
+
+                <!-- NÚT LỌC BOOKMARK -->
+                <button id="bookmarkToggle" class="bookmark-toggle-btn" title="Xem bài đã lưu">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Đã lưu</span>
+                </button>
             </div>
         </div>
 
@@ -59,27 +65,45 @@
         </div>
     </main>
 
+    <!-- MODAL -->
     <div id="articleModal" class="full-modal">
         <div class="modal-bg-overlay" id="modalBg"></div>
         <div class="modal-content-box animate-pop-in">
+
+            <!-- READING PROGRESS BAR -->
+            <div class="reading-progress-track">
+                <div id="readingProgress" class="reading-progress-bar"></div>
+            </div>
+
             <div class="modal-actions-top">
+                <!-- Bookmark -->
+                <button class="btn-action-bookmark" id="modalBookmarkBtn" title="Lưu bài viết">
+                    <i class="far fa-bookmark"></i>
+                </button>
+                <!-- Copy link -->
                 <button class="btn-action-copy" id="modalCopyBtn" title="Sao chép liên kết">
                     <i class="far fa-copy"></i>
                 </button>
+                <!-- Đóng -->
                 <button class="btn-close-modal" id="closeBtn" title="Đóng bài viết">&times;</button>
             </div>
 
-            <div id="modalBody" class="post-detail-content">
-            </div>
+            <div id="modalBody" class="post-detail-content"></div>
         </div>
+
+        <!-- BACK TO TOP -->
+        <button id="backToTop" class="back-to-top-btn" title="Lên đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </div>
 
+    <!-- TOAST -->
     <div id="toast" class="toast">
-        <i class="fas fa-check-circle"></i> Đã sao chép liên kết bài viết!
+        <i class="fas fa-check-circle"></i>
+        <span>Đã sao chép liên kết bài viết!</span>
     </div>
 
     <script src="js/main.js"></script>
-    <script src="js/news-widget/loader.js"></script>
     <script src="js/articles/article-data.js"></script>
     <script src="js/articles/articles.js"></script>
 </body>

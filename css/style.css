@@ -335,17 +335,20 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px; /* Cân chỉnh lại khoảng cách */
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(187, 134, 252, 0.3);
 }
-
+.sidebar-links {
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
 .sidebar-header h3 {
+    font-family: 'Segoe UI', sans-serif; /* Đồng bộ font */
     font-size: 1.6rem;
     color: #bb86fc;
     margin: 0;
-    font-weight: 700;
-    letter-spacing: 1px;
 }
 
 .menu-close-btn {
@@ -354,18 +357,11 @@ footer {
     color: #ff5252;
     font-size: 2.2rem;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .menu-close-btn:hover {
-    background: rgba(255, 82, 82, 0.2);
-    transform: scale(1.1);
+    transform: rotate(90deg);
 }
 
 .sidebar-links li {
@@ -409,5 +405,4 @@ footer {
 .sidebar-overlay.active {
     opacity: 1;
     visibility: visible;
-    backdrop-filter: blur(5px);
 }
