@@ -1,20 +1,6 @@
 const articlesData = [
-
-  {
-    id: 2,
-    title: "Refresh có làm máy nhanh hơn?",
-    date: "10/10/2025",
-    category: "Tech",
-    excerpt: "Sự thật về việc nhấn Refresh trên desktop — có thực sự giúp máy chạy nhanh hơn không?",
-    content: `
-    <u>Ngắn gọn là không.</u><br>
-    <b>Lý do:</b>
-    <p>+ chỉ là tải lại data or làm mới giao diện</p>
-    + nó phản tác dụng khi cpu phải hoạt động thêm 1 chút</p>
-    + cảm giác mượt là cảm giác ảo</p>`,
-  },
  {
-    id: 3,
+    id: 2,
     title: "Hướng dẫn toàn diện: Giảm dung lượng lưu trữ ổ cứng",
     date: "14/01/2026",
     category: "Tech",
@@ -171,7 +157,7 @@ const articlesData = [
     `,
   },
   {
-    id: 4,
+    id: 3,
     title: "Xuất file capcut dùng pro mà không cần pro",
     date: "14/01/2026",
     category: "Trick",
@@ -190,7 +176,7 @@ const articlesData = [
   `,
   },
   {
-    id: 5,
+    id: 4,
     title: "Tổng hợp các app VPN phổ biến hiện nay",
     date: "14/01/2026",
     category: "Tài nguyên",
@@ -256,7 +242,7 @@ const articlesData = [
   `,
   },
   {
-    id: 6,
+    id: 5,
     title: "Combo Shadowrocket",
     date: "11/01/2026",
     category: "Trick",
@@ -280,22 +266,6 @@ const articlesData = [
   },
   {
     id: 7,
-    title: "Tổng hợp Khóa học đa ngành",
-    date: "11/01/2026",
-    category: "Tài nguyên",
-    excerpt: "Link Google Drive khóa học miễn phí: Shopee, TikTok Shop, ChatGPT, Photoshop, CapCut...",
-    content: `
-         <p>Shoppe: <a href="https://drive.google.com/drive/folders/1lQpnZoyG7hI-V57xOtn9-qOGfL5yoLq4"target="_blank">link</a><br>
-          chạy qc tiktok: <a href="https://drive.google.com/drive/folders/1-d_zpGlu8ma4mnFXvXw_5m1_5VEso2t7"target="_blank">link</a><br>
-          tiktok shop: <a href="https://drive.google.com/drive/folders/1kKu-Ln2CMlmm05TRSRd1-1B0DTNzuU0I"target="_blank">link</a><br>
-          chat gpt:<a href="https://drive.google.com/drive/folders/17OmUO45MVdow04ahkvtad2c5Up-cjnMU"target="_blank">link</a><br>
-          photoshop: <a href="https://drive.google.com/drive/folders/1ZaS5kstFSNlxms07pQHL7d8q5ENY5W-G"target="_blank">link</a><br>
-          reup tiktok: <a href="https://drive.google.com/drive/folders/1QLbk4yfZ5VLhuzYDhQAhmI2f36SwXQlh"target="_blank">link</a><br>
-          capcut: <a href="https://drive.google.com/drive/folders/1FNNweSUKpAYYx9BOPh9ZN0D3RfXnJy9Q"target="_blank">link</a></p>
-         `,
-  },
-  {
-    id: 8,
     title: "Tài liệu lập trình",
     date: "11/01/2026",
     category: "Tech",
@@ -349,24 +319,43 @@ const articlesData = [
     `,
   },
   {
-    id: 9,
+    id: 8,
     title: "Tổng hợp Tài nguyên",
     date: "11/01/2026",
     category: "Tài nguyên",
     excerpt: "Excel, CapCut IPA, kho phần mềm, chặn quảng cáo iPhone, prompt AI, ksign, esign...",
     content:`
-    <h>Excel: <a href="https://drive.google.com/drive/folders/1ym2rV7q5GcpBsuVAIxwZkiP34T5KeL93">link</a><br>
-    <h>Capcut ipa: <a href="https://ipaomtk.com/capcut-ipa/">link</a><br>
-    <h>Kho phần mềm: <a href="https://www.hoanghaopc.com/trang-ch%E1%BB%A7">link</a><br>
+    <p>Excel: <a href="https://drive.google.com/drive/folders/1ym2rV7q5GcpBsuVAIxwZkiP34T5KeL93">link</a><br>
+    Kho phần mềm: <a href="https://www.hoanghaopc.com/trang-ch%E1%BB%A7">link</a><br>
     chặn qc iphone: <a href="https://www.mediafire.com/file/mp73j9qvevt2hdq">link</a><br>
     promt lệnh AI: <a href="https://academy.openai.com/public/tags/prompt-packs-6849a0f98c613939acef841c?fbclid=IwY2xjawNIzVRleHRuA2FlbQIxMABicmlkETFZVlF2WHVLS05nWEpIWU1NAR45V0SeTFKGz53z9-256aTMWtcU5XiVFUFc3CGZRo2KYItt4C-rQAvsXDFJ6g_aem_21CasUjZMjr35LAmYJEL5w">link</a><br>
     nhân bản app: <a href="https://github.com/sandboxie-plus/Sandboxie/releases/tag/v1.16.3">link</a><br>
     kho api: <a href="https://ios.codevn.net/">link</a><br>
-    ksign,esign...: <a href="https://khoindvn.io.vn/">link</a></h>
+    ksign,esign...: <a href="https://khoindvn.io.vn/">link</a>
+    chat gpt:<a href="https://drive.google.com/drive/folders/17OmUO45MVdow04ahkvtad2c5Up-cjnMU"target="_blank">link</a><br>
+    photoshop: <a href="https://drive.google.com/drive/folders/1ZaS5kstFSNlxms07pQHL7d8q5ENY5W-G"target="_blank">link</a><br>
+    <hr>
+    <h1>capcut</h1>
+    khóa học: <a href="https://drive.google.com/drive/folders/1FNNweSUKpAYYx9BOPh9ZN0D3RfXnJy9Q"target="_blank">link</a><br>
+    khóa học: <a href="https://drive.google.com/drive/folders/158AjHmp5kHyjr4aqJnq_o4oVEjr7TcRp"target="_blank">link</a>
+    Capcut ipa: <a href="https://ipaomtk.com/capcut-ipa/">link</a><br>
+    <hr>
+    <h1>shoppe</h1>
+    khóa học: <a href="https://drive.google.com/drive/folders/1lQpnZoyG7hI-V57xOtn9-qOGfL5yoLq4"target="_blank">link</a><br>
+    <hr>
+    <h1>canva</h1>
+    khóa học<a href="https://drive.google.com/drive/folders/1jEYVBRK6UIMzGb8yw3fn8ziYOPKBsoer"target=">blank">link</a>
+    <hr>
+    <h1>tiktok</h1>
+    reup tiktok: <a href="https://drive.google.com/drive/folders/1QLbk4yfZ5VLhuzYDhQAhmI2f36SwXQlh"target="_blank">link</a><br>
+    tiktok shop: <a href="https://drive.google.com/drive/folders/1kKu-Ln2CMlmm05TRSRd1-1B0DTNzuU0I"target="_blank">link</a><br>
+    chạy qc tiktok: <a href="https://drive.google.com/drive/folders/1-d_zpGlu8ma4mnFXvXw_5m1_5VEso2t7"target="_blank">link</a><br>
+    </p>
+
     `
   },
   {
-  id: 10,
+  id: 9,
   title: "Tổng hợp Web hữu ích 2025 theo nhóm thể loại",
   date: "26/02/2026",
   category: "Tài nguyên",

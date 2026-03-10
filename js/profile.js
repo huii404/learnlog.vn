@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="project-img-placeholder">
                             <i class="fas fa-map-location-dot"></i>
                         </div>
-                        <span class="project-name">?</span>
-                        <p class="project-desc">?</p>
-                        <a href="" class="btn-link" target="_blank">
+                        <span class="project-name">CMD Tool</span>
+                        <p class="project-desc">App c++</p>
+                        <a href="https://github.com/huii404/sourcecode/tree/main/c%2B%2B/cmd_box" class="btn-link" target="_blank">
                             <i class="fab fa-github"></i> Xem chi tiết
                         </a>
                     </div>
@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="skill-row">
                         <div class="skill-header">
                             <span class="skill-name"><i class="fab fa-html5" style="color:#e44d26"></i> HTML / CSS</span>
-                            <span class="skill-pct">20%</span>
+                            <span class="skill-pct">15%</span>
                         </div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="20" style="background: linear-gradient(90deg,#e44d26,#f0a04b)"></div>
+                            <div class="skill-bar-fill" data-width="15" style="background: linear-gradient(90deg,#e44d26,#f0a04b)"></div>
                         </div>
                     </div>
                     <div class="skill-row">
@@ -54,10 +54,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="skill-row">
                         <div class="skill-header">
                             <span class="skill-name"><i class="fab fa-java" style="color:#f89820"></i> Java</span>
-                            <span class="skill-pct">40%</span>
+                            <span class="skill-pct">30%</span>
                         </div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="40" style="background: linear-gradient(90deg,#f89820,#e74c3c)"></div>
+                            <div class="skill-bar-fill" data-width="30" style="background: linear-gradient(90deg,#f89820,#e74c3c)"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-python" style="color:#f89820"></i>python</span>
+                            <span class="skill-pct">0.2%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="0.2" style="background: linear-gradient(90deg,#f89820,#e74c3c)"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-row">
+                        <div class="skill-header">
+                            <span class="skill-name"><i class="fab fa-cs" style="color:#f89820"></i>C#</span>
+                            <span class="skill-pct">20%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="20" style="background: linear-gradient(90deg,#f89820,#e74c3c)"></div>
                         </div>
                     </div>
                 </div>
@@ -180,27 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // =============================================
-    // STAT COUNTER ANIMATION
-    // =============================================
-    function animateCounters() {
-        document.querySelectorAll('.stat-number').forEach(el => {
-            const target = parseInt(el.dataset.target);
-            let current = 0;
-            const step = Math.ceil(target / 30);
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    el.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    el.textContent = current;
-                }
-            }, 40);
-        });
-    }
-
     // Khởi chạy
     switchTab('about');
-    setTimeout(animateCounters, 300);
+    
 });
