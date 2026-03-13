@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <span class="project-name">CMD Tool</span>
                         <p class="project-desc">App c++</p>
-                        <a href="https://github.com/huii404/sourcecode/tree/main/c%2B%2B/cmd_box" class="btn-link" target="_blank">
+                        <a href="https://github.com/huii404/CMD-TOOL" class="btn-link" target="_blank">
                             <i class="fab fa-github"></i> Xem chi tiết
                         </a>
                     </div>
@@ -144,17 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <i class="fas fa-arrow-right contact-arrow"></i>
                     </a>
-                    <a href="#" class="contact-card">
-                        <div class="contact-icon" style="background:linear-gradient(135deg,#1877f2,#42a5f5)">
-                            <i class="fab fa-facebook"></i>
-                        </div>
-                        <div class="contact-info">
-                            <span class="contact-label">Facebook</span>
-                            <span class="contact-value">Nguyễn Huy</span>
-                        </div>
-                        <i class="fas fa-arrow-right contact-arrow"></i>
-                    </a>
-                    <a href="#" class="contact-card">
+                    <a href="https://www.tiktok.com/@babysharkkk____________" class="contact-card">
                         <div class="contact-icon" style="background:linear-gradient(135deg,#010101,#555)">
                             <i class="fa-brands fa-tiktok"></i>
                         </div>

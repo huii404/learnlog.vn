@@ -1,6 +1,6 @@
 const articlesData = [
  {
-    id: 2,
+    id: 1,
     title: "Hướng dẫn toàn diện: Giảm dung lượng lưu trữ ổ cứng",
     date: "14/01/2026",
     category: "Tech",
@@ -157,7 +157,7 @@ const articlesData = [
     `,
   },
   {
-    id: 3,
+    id: 2,
     title: "Xuất file capcut dùng pro mà không cần pro",
     date: "14/01/2026",
     category: "Trick",
@@ -176,7 +176,7 @@ const articlesData = [
   `,
   },
   {
-    id: 4,
+    id: 3,
     title: "Tổng hợp các app VPN phổ biến hiện nay",
     date: "14/01/2026",
     category: "Tài nguyên",
@@ -242,30 +242,7 @@ const articlesData = [
   `,
   },
   {
-    id: 5,
-    title: "Combo Shadowrocket",
-    date: "11/01/2026",
-    category: "Trick",
-    excerpt: "Bộ sưu tập đầy đủ config & module Shadowrocket: Locket, YouTube, Spotify, Lightroom...",
-    content: `
-         <img src="https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2024_3_13_638459520438357897_shadowrocket_.jpg"alt=""heght="200px"width="200px">
-         <ol>
-           <li>App locket mod: <a href="https://dvsteam.vn/locket-free"target="_blank">link</a><br>
-           <li>Config locket 1: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a>
-           <li>Config locket 2: <a href="https://raw.githubusercontent.com/hvbstar/coderhvb/main/Locket_Gold_HVB.sgmodule"target="_blank">link</a>
-           <li>Config youtube: <a href="https://raw.githubusercontent.com/quocchienn/YouTubePIP/refs/heads/YouTube%2B%2B/YouTubefix3.conf"target="_blank">link</a>
-           <li>Module youtube: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a>
-           <li>Config spotify: <a href="https://raw.githubusercontent.com/quocchienn/1in1/refs/heads/main/Spotify.conf"target="_blank">link</a>
-           <li>module spotify: <a href="https://raw.githubusercontent.com/quocchienn/1in1/refs/heads/main/Spotify.module"target="_blank">link</a>
-           <li>Config soundcloud: <a href="https://raw.githubusercontent.com/vantuan380/vantuan/refs/heads/main/soundcloud.module"target="_blank">link</a>
-           <li>Module tổng hợp: <a href="https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/ALL_Lucky_VP3.modules"target="_blank">link</a>
-           <li>Module meitu: <a href="https://raw.githubusercontent.com/vantuan380/vantuan/refs/heads/main/Meitu.module"target="_blank">link</a>
-           <li>Module lightrom: <a href="https://raw.githubusercontent.com/vantuan380/phonton/refs/heads/main/lightroom.module"target="_blank">link</a></li>
-          </ol>
-         `,
-  },
-  {
-    id: 7,
+    id: 4,
     title: "Tài liệu lập trình",
     date: "11/01/2026",
     category: "Tech",
@@ -299,6 +276,7 @@ const articlesData = [
     <p>
       Tài liệu Python: <a href="https://github.com/codetoanbug/pytutor">Link</a><br>
       Python PDF: <a href="https://drive.google.com/drive/u/0/folders/1XxvRMSDA-KgfRL8oC-vLkbUpM8Tdcq3o">Link</a>
+      khóa học <a href="https://www.kaggle.com/learn/python">link</a><br>
     </p>
     <hr>
     <h3>Tổng hợp</h3>
@@ -319,43 +297,78 @@ const articlesData = [
     `,
   },
   {
-    id: 8,
+    id: 5,
     title: "Tổng hợp Tài nguyên",
     date: "11/01/2026",
     category: "Tài nguyên",
     excerpt: "Excel, CapCut IPA, kho phần mềm, chặn quảng cáo iPhone, prompt AI, ksign, esign...",
     content:`
-    <p>Excel: <a href="https://drive.google.com/drive/folders/1ym2rV7q5GcpBsuVAIxwZkiP34T5KeL93">link</a><br>
+    <p>
+    <hr>
+    <h2> combo shadowrocket</h2>
+    <ul>
+        <li>App locket mod: <a href="https://dvsteam.vn/locket-free"target="_blank">link</a><br>
+        <li>Config locket 1: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a>
+        <li>Config locket 2: <a href="https://raw.githubusercontent.com/hvbstar/coderhvb/main/Locket_Gold_HVB.sgmodule"target="_blank">link</a>         <li>Config youtube: <a href="https://raw.githubusercontent.com/quocchienn/YouTubePIP/refs/heads/YouTube%2B%2B/YouTubefix3.conf"target="_blank">link</a>
+        <li>Module youtube: <a href="https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule"target="_blank">link</a>
+        <li>Config spotify: <a href="https://raw.githubusercontent.com/quocchienn/1in1/refs/heads/main/Spotify.conf"target="_blank">link</a>
+        <li>module spotify: <a href="https://raw.githubusercontent.com/quocchienn/1in1/refs/heads/main/Spotify.module"target="_blank">link</a>
+        <li>Config soundcloud: <a href="https://raw.githubusercontent.com/vantuan380/vantuan/refs/heads/main/soundcloud.module"target="_blank">link</a>
+        <li>Module tổng hợp: <a href="https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/ALL_Lucky_VP3.modules"target="_blank">link</a>           <li>Module meitu: <a href="https://raw.githubusercontent.com/vantuan380/vantuan/refs/heads/main/Meitu.module"target="_blank">link</a>
+        <li>Module lightrom: <a href="https://raw.githubusercontent.com/vantuan380/phonton/refs/heads/main/lightroom.module"target="_blank">link</a></li>
+    </ul>
+    <hr>
+    <h2>chung chung</h2>
     Kho phần mềm: <a href="https://www.hoanghaopc.com/trang-ch%E1%BB%A7">link</a><br>
     chặn qc iphone: <a href="https://www.mediafire.com/file/mp73j9qvevt2hdq">link</a><br>
     promt lệnh AI: <a href="https://academy.openai.com/public/tags/prompt-packs-6849a0f98c613939acef841c?fbclid=IwY2xjawNIzVRleHRuA2FlbQIxMABicmlkETFZVlF2WHVLS05nWEpIWU1NAR45V0SeTFKGz53z9-256aTMWtcU5XiVFUFc3CGZRo2KYItt4C-rQAvsXDFJ6g_aem_21CasUjZMjr35LAmYJEL5w">link</a><br>
     nhân bản app: <a href="https://github.com/sandboxie-plus/Sandboxie/releases/tag/v1.16.3">link</a><br>
     kho api: <a href="https://ios.codevn.net/">link</a><br>
-    ksign,esign...: <a href="https://khoindvn.io.vn/">link</a>
+    ksign,esign...: <a href="https://khoindvn.io.vn/">link</a><br>
     chat gpt:<a href="https://drive.google.com/drive/folders/17OmUO45MVdow04ahkvtad2c5Up-cjnMU"target="_blank">link</a><br>
-    photoshop: <a href="https://drive.google.com/drive/folders/1ZaS5kstFSNlxms07pQHL7d8q5ENY5W-G"target="_blank">link</a><br>
-    <hr>
-    <h1>capcut</h1>
-    khóa học: <a href="https://drive.google.com/drive/folders/1FNNweSUKpAYYx9BOPh9ZN0D3RfXnJy9Q"target="_blank">link</a><br>
-    khóa học: <a href="https://drive.google.com/drive/folders/158AjHmp5kHyjr4aqJnq_o4oVEjr7TcRp"target="_blank">link</a>
     Capcut ipa: <a href="https://ipaomtk.com/capcut-ipa/">link</a><br>
     <hr>
-    <h1>shoppe</h1>
-    khóa học: <a href="https://drive.google.com/drive/folders/1lQpnZoyG7hI-V57xOtn9-qOGfL5yoLq4"target="_blank">link</a><br>
+    <h2>capcut</h2>
+    khóa học: <a href="https://drive.google.com/drive/folders/1FNNweSUKpAYYx9BOPh9ZN0D3RfXnJy9Q"target="_blank">link</a><br>
+    khóa học: <a href="https://drive.google.com/drive/folders/158AjHmp5kHyjr4aqJnq_o4oVEjr7TcRp"target="_blank">link</a>
     <hr>
-    <h1>canva</h1>
+    <h2>shoppe</h2>
+    khóa học: <a href="https://drive.google.com/drive/folders/1lQpnZoyG7hI-V57xOtn9-qOGfL5yoLq4"target="_blank">link</a><br>
+    khóa học: <a href="https://drive.google.com/drive/folders/15fBjr3VyhljC7y7w5eK7vbJOcOveVeji"target="_blank">link</a><br>
+    <hr>
+    <h2>canva</h2>
+    khóa học<a href="https://drive.google.com/drive/folders/1jEYVBRK6UIMzGb8yw3fn8ziYOPKBsoer"target=">blank">link</a><br>
+    khóa học<a href="https://drive.google.com/drive/folders/1ajNGgZiYM_pMkr6-ld1I8oGo4F_Lbxfv"target=">blank">link</a><br>
     khóa học<a href="https://drive.google.com/drive/folders/1jEYVBRK6UIMzGb8yw3fn8ziYOPKBsoer"target=">blank">link</a>
     <hr>
-    <h1>tiktok</h1>
+    <h2>tiktok</h2>
     reup tiktok: <a href="https://drive.google.com/drive/folders/1QLbk4yfZ5VLhuzYDhQAhmI2f36SwXQlh"target="_blank">link</a><br>
     tiktok shop: <a href="https://drive.google.com/drive/folders/1kKu-Ln2CMlmm05TRSRd1-1B0DTNzuU0I"target="_blank">link</a><br>
     chạy qc tiktok: <a href="https://drive.google.com/drive/folders/1-d_zpGlu8ma4mnFXvXw_5m1_5VEso2t7"target="_blank">link</a><br>
+    chạy qc tiktok: <a href="https://drive.google.com/drive/folders/1z2ANRwsMxUlCznarfMwT5_JCZKbXNDYf"target="_blank">link</a><br>
+    <hr>
+    <h2>Excel</h2>
+    khóa học<a href="https://www.w3schools.com/excel/">link</a><br>
+    khóa học: <a href="https://drive.google.com/drive/folders/1ym2rV7q5GcpBsuVAIxwZkiP34T5KeL93">link</a>
+    <hr>
+    <h2> SQL</h2>
+    khóa học<a href="https://www.codecademy.com/learn/learn-sql">link</a>
+    <hr>
+    <h2>Facebook</h2>
+    khóa học<a href="https://drive.google.com/drive/folders/1mF3PEW3ZrCvt202aHPF8l_rFqZVvyCTF">link</a>
+    <hr>
+    <h2>Youtube</h2>
+    khóa học <a href="https://drive.google.com/drive/folders/1DLegtPrZC0WL5v2jLhf6RZ8VH53siPBC">link</a>
+    <hr>
+    <h2>Photoshop</h2>
+    khóa học<a href="https://drive.google.com/drive/folders/1nG4e3SPa1MudrzSmVTEbAAPG2K55JiMD"target="_blank>link</a>
+    photoshop: <a href="https://drive.google.com/drive/folders/1ZaS5kstFSNlxms07pQHL7d8q5ENY5W-G"target="_blank">link</a><br>
     </p>
 
     `
   },
   {
-  id: 9,
+  id: 6,
   title: "Tổng hợp Web hữu ích 2025 theo nhóm thể loại",
   date: "26/02/2026",
   category: "Tài nguyên",
